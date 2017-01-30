@@ -18,7 +18,7 @@ class Program extends CI_Controller {
 	{
 		$query = $this->program_sub_model->info(array('slug' => $param));
 		
-		if ($query->num_rows() > 0)
+		if ($query->code == 200)
 		{
 			return FALSE;
 		}
@@ -89,7 +89,7 @@ class Program extends CI_Controller {
 
         $get = $this->program_model->info(array('id_program' => $data['id']));
 
-        if ($get->num_rows() > 0)
+        if ($get->code == 200)
         {
             if ($this->input->post('delete') == TRUE)
             {
@@ -139,7 +139,7 @@ class Program extends CI_Controller {
         $total = $this->program_model->lists_count(array());
 		$jsonData = array('total' => $total, 'results' => array());
 
-        foreach ($query->result() as $row)
+        foreach ($query->result as $row)
         {
             $action = '<a title="Add Sub-program" href="program_sub_create?id='.$row->id_program.'"><i class="fa fa-plus font16"></i></a>&nbsp;
 						<a title="View Sub Program" href="program_sub_lists?id='.$row->id_program.'"><i class="fa fa-external-link font16 text-success"></i></a>&nbsp;
@@ -226,9 +226,9 @@ class Program extends CI_Controller {
 		
 		$query2 = $this->program_model->info(array('id_program' => $id_program));
 		
-		if ($query2->num_rows() > 0)
+		if ($query2->code == 200)
 		{
-			$data['program'] = $query2->row();
+			$data['program'] = $query2->result;
 		}
 		
 		$data['view_content'] = 'program/program_sub_create';
@@ -244,7 +244,7 @@ class Program extends CI_Controller {
 
         $get = $this->program_sub_model->info(array('id_program_sub' => $data['id']));
 
-        if ($get->num_rows() > 0)
+        if ($get->code == 200)
         {
             if ($this->input->post('delete') == TRUE)
             {
@@ -295,7 +295,7 @@ class Program extends CI_Controller {
         $total = $this->program_sub_model->lists_count(array('id_program' => $id_program));
 		$jsonData = array('total' => $total, 'results' => array());
 
-        foreach ($query->result() as $row)
+        foreach ($query->result as $row)
         {
             $action = '<a title="Edit" href="program_edit?id='.$row->id_program.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
                         <a title="Delete" id="'.$row->id_program.'" class="delete '.$row->id_program.'-delete" href="#"><i class="fa fa-times font16 text-danger"></i></a>';
@@ -321,9 +321,9 @@ class Program extends CI_Controller {
 		$data = array();
 		$query2 = $this->program_model->info(array('id_program' => $this->input->get_post('id')));
 		
-		if ($query2->num_rows() > 0)
+		if ($query2->code == 200)
 		{
-			$data['program'] = $query2->row();
+			$data['program'] = $query2->result;
 		}
 		
 		$data['view_content'] = 'program/program_sub_lists';

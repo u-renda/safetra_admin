@@ -96,9 +96,6 @@
 		<!-- Theme Base, Components and Settings -->
 		<script src="<?php echo base_url('assets/js').'/theme.js'; ?>"></script>
 		
-		<!-- Theme Custom -->
-		<script src="<?php echo base_url('assets/js').'/app.js'; ?>"></script>
-		
 		<!-- Theme Initialization Files -->
 		<script src="<?php echo base_url('assets/js').'/theme.init.js'; ?>"></script>
 

@@ -63,7 +63,7 @@ class Testimony extends CI_Controller {
 
         $get = $this->testimony_model->info(array('id_testimony' => $data['id']));
 
-        if ($get->num_rows() > 0)
+        if ($get->code == 200)
         {
             if ($this->input->post('delete') == TRUE)
             {
@@ -113,7 +113,7 @@ class Testimony extends CI_Controller {
         $total = $this->testimony_model->lists_count(array());
 		$jsonData = array('total' => $total, 'results' => array());
 
-        foreach ($query->result() as $row)
+        foreach ($query->result as $row)
         {
             $action = '<a title="View" id="'.$row->id_testimony.'" class="view '.$row->id_testimony.'-view" href="#"><i class="fa fa-file-text font16"></i></a>&nbsp;
 						<a title="Edit" href="testimony_edit?id='.$row->id_testimony.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;

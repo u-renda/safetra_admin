@@ -2,103 +2,56 @@
 
 class Program_sub_model extends CI_Model {
 
-    var $table = 'program_sub';
-    var $table_id = 'id_program_sub';
-    
-    public function __construct()
+    var $page = 'program_sub';
+
+    function __construct()
     {
         parent::__construct();
+        $this->key = array('api_key' => $this->config->item('safetra_key'));
     }
-    
-    function create($param)
+
+    function create($params)
     {
-        $this->db->set($this->table_id, 'UUID_SHORT()', FALSE);
-		$query = $this->db->insert($this->table, $param);
-		return $query;
+        $result = null;
+        $url = $this->config->item('safetra_api'). $this->page . '/create';
+        $params = array_merge($params, $this->key);
+        $result = $this->rest->post($url, $params);
+		return $result;
     }
-	
-	function delete($id)
+
+    function delete($params)
     {
-        $this->db->where($this->table_id, $id);
-        $query = $this->db->delete($this->table);
-        return $query;
+        $result = null;
+        $url = $this->config->item('safetra_api'). $this->page . '/delete';
+        $params = array_merge($params, $this->key);
+        $result = $this->rest->post($url, $params);
+		return $result;
     }
-    
-    function info($param)
+
+    function info($params)
     {
-        $where = array();
-		if (isset($param['id_program_sub']) == TRUE)
-		{
-			$where += array('id_program_sub' => $param['id_program_sub']);
-		}
-		if (isset($param['slug']) == TRUE)
-		{
-			$where += array($this->table.'.slug' => $param['slug']);
-		}
-        
-        $this->db->select('id_program_sub, '.$this->table.'.id_program, '.$this->table.'.name,
-						  '.$this->table.'.slug, program_objective, training_purpose,
-						  requirements_of_participant, training_material, others,
-						  '.$this->table.'.created_date, '.$this->table.'.updated_date');
-        $this->db->from($this->table);
-        $this->db->join('program', $this->table.'.id_program = program.id_program');
-        $this->db->where($where);
-        $query = $this->db->get();
-        return $query;
+        $result = null;
+        $url = $this->config->item('safetra_api'). $this->page . '/info';
+        $params = array_merge($params, $this->key);
+        $result = $this->rest->get($url, $params);
+		return $result;
     }
-    
-    function lists($param)
+
+    function lists($params)
     {
-        $where = array();
-        $order = 'created_date';
-        $sort = 'desc';
-        $offset = 0;
-        $limit = 20;
-        
-        if (isset($param['order']) == TRUE)
-        {
-            $order = $param['order'];
-        }
-        if (isset($param['sort']) == TRUE)
-        {
-            $sort = $param['sort'];
-        }
-        if (isset($param['limit']) == TRUE)
-        {
-            $limit = $param['limit'];
-        }
-        if (isset($param['offset']) == TRUE)
-        {
-            $offset = $param['offset'];
-        }
-        if (isset($param['id_program']) == TRUE)
-        {
-            $where += array('id_program' => $param['id_program']);
-        }
-        
-        $this->db->select('id_program_sub, id_program, name, slug, program_objective, training_purpose,
-						  requirements_of_participant, training_material, others, created_date,
-						  updated_date');
-        $this->db->from($this->table);
-        $this->db->where($where);
-        $this->db->order_by($order, $sort);
-        $this->db->limit($limit, $offset);
-        $query = $this->db->get();
-        return $query;
+        $result = null;
+        $url = $this->config->item('safetra_api'). $this->page . '/lists';
+        $params = array_merge($params, $this->key);
+        $result = $this->rest->get($url, $params);
+		return $result;
     }
-    
-    function lists_count($param)
+
+    function update($params)
     {
-        $where = array();
-        if (isset($param['id_program']) == TRUE)
-        {
-            $where += array('id_program' => $param['id_program']);
-        }
-        
-        $this->db->select($this->table_id);
-        $this->db->from($this->table);
-        $this->db->where($where);
-        $query = $this->db->count_all_results();
-        return $query;
+        $result = null;
+        $url = $this->config->item('safetra_api'). $this->page . '/update';
+        $params = array_merge($params, $this->key);
+        $result = $this->rest->post($url, $params);
+		return $result;
     }
 }

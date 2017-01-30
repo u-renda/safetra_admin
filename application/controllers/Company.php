@@ -65,7 +65,7 @@ class Company extends CI_Controller {
 
         $get = $this->company_model->info(array('id_company' => $data['id']));
 
-        if ($get->num_rows() > 0)
+        if ($get->code == 200)
         {
             if ($this->input->post('delete') == TRUE)
             {
@@ -115,7 +115,7 @@ class Company extends CI_Controller {
         $total = $this->company_model->lists_count(array());
 		$jsonData = array('total' => $total, 'results' => array());
 
-        foreach ($query->result() as $row)
+        foreach ($query->result as $row)
         {
             $action = '<a title="View" id="'.$row->id_company.'" class="view '.$row->id_company.'-view" href="#"><i class="fa fa-file-text font16"></i></a>&nbsp;
 						<a title="Edit" href="company_edit?id='.$row->id_company.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
@@ -172,7 +172,7 @@ class Company extends CI_Controller {
 	{
 		$query = $this->company_model->info(array('name' => $this->input->post('name')));
 		
-		if ($query->num_rows() > 0)
+		if ($query->code == 200)
 		{
 			$this->form_validation->set_message('check_name', 'Nama sudah terdaftar');
 			return FALSE;

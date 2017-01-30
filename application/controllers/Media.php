@@ -154,7 +154,7 @@ class Media extends CI_Controller {
         $total = $this->media_album_model->lists_count(array());
 		$jsonData = array('total' => $total, 'results' => array());
 
-        foreach ($query->result() as $row)
+        foreach ($query->result as $row)
         {
             $action = '<a title="View Media" href="program_sub_lists?id='.$row->id_media_album.'"><i class="fa fa-external-link font16 text-success"></i></a>&nbsp;
 						<a title="Edit" href="program_edit?id='.$row->id_media_album.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
@@ -228,7 +228,7 @@ class Media extends CI_Controller {
 	{
 		$query = $this->media_album_model->info(array('slug' => $param));
 		
-		if ($query->num_rows() > 0)
+		if ($query->code == 200)
 		{
 			return FALSE;
 		}

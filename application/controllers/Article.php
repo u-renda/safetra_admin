@@ -78,7 +78,7 @@ class Article extends CI_Controller {
 
         $get = $this->article_model->info(array('id_article' => $data['id']));
 
-        if ($get->num_rows() > 0)
+        if ($get->code == 200)
         {
             if ($this->input->post('delete') == TRUE)
             {
@@ -128,7 +128,7 @@ class Article extends CI_Controller {
         $total = $this->article_model->lists_count(array());
 		$jsonData = array('total' => $total, 'results' => array());
 
-        foreach ($query->result() as $row)
+        foreach ($query->result as $row)
         {
             $action = '<a title="View" id="'.$row->id_article.'" class="view '.$row->id_article.'-view" href="#"><i class="fa fa-file-text font16"></i></a>&nbsp;
 						<a title="Edit" href="article_edit?id='.$row->id_article.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
@@ -192,7 +192,7 @@ class Article extends CI_Controller {
 	{
 		$query = $this->article_model->info(array('slug' => $param));
 		
-		if ($query->num_rows() > 0)
+		if ($query->code == 200)
 		{
 			return FALSE;
 		}

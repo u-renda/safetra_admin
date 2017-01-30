@@ -2,85 +2,56 @@
 
 class Member_model extends CI_Model {
 
-    var $table = 'member';
-    var $table_id = 'id_member';
-    
-    public function __construct()
+    var $page = 'member';
+
+    function __construct()
     {
         parent::__construct();
+        $this->key = array('api_key' => $this->config->item('safetra_key'));
     }
-    
-    function create($param)
+
+    function create($params)
     {
-        $this->db->set($this->table_id, 'UUID_SHORT()', FALSE);
-		$query = $this->db->insert($this->table, $param);
-		return $query;
+        $result = null;
+        $url = $this->config->item('safetra_api'). $this->page . '/create';
+        $params = array_merge($params, $this->key);
+        $result = $this->rest->post($url, $params);
+		return $result;
     }
-	
-	function delete($id)
+
+    function delete($params)
     {
-        $this->db->where($this->table_id, $id);
-        $query = $this->db->delete($this->table);
-        return $query;
+        $result = null;
+        $url = $this->config->item('safetra_api'). $this->page . '/delete';
+        $params = array_merge($params, $this->key);
+        $result = $this->rest->post($url, $params);
+		return $result;
     }
-    
-    function info($param)
+
+    function info($params)
     {
-        $where = array();
-        
-        $this->db->select('id_member, '.$this->table.'.id_company, '.$this->table.'.name, password,
-						  email, '.$this->table.'.phone_number, status, '.$this->table.'.created_date,
-						  '.$this->table.'.updated_date');
-        $this->db->from($this->table);
-        $this->db->join('company', $this->table.'.id_company = company.id_company');
-        $this->db->where($where);
-        $query = $this->db->get();
-        return $query;
+        $result = null;
+        $url = $this->config->item('safetra_api'). $this->page . '/info';
+        $params = array_merge($params, $this->key);
+        $result = $this->rest->get($url, $params);
+		return $result;
     }
-    
-    function lists($param)
+
+    function lists($params)
     {
-        $where = array();
-        $order = 'created_date';
-        $sort = 'desc';
-        $offset = 0;
-        $limit = 20;
-        
-        if (isset($param['order']) == TRUE)
-        {
-            $order = $param['order'];
-        }
-        if (isset($param['sort']) == TRUE)
-        {
-            $sort = $param['sort'];
-        }
-        if (isset($param['limit']) == TRUE)
-        {
-            $limit = $param['limit'];
-        }
-        if (isset($param['offset']) == TRUE)
-        {
-            $offset = $param['offset'];
-        }
-        
-        $this->db->select('id_member, id_company, name, password, email, phone_number, status,
-                          created_date, updated_date');
-        $this->db->from($this->table);
-        $this->db->where($where);
-        $this->db->order_by($order, $sort);
-        $this->db->limit($limit, $offset);
-        $query = $this->db->get();
-        return $query;
+        $result = null;
+        $url = $this->config->item('safetra_api'). $this->page . '/lists';
+        $params = array_merge($params, $this->key);
+        $result = $this->rest->get($url, $params);
+		return $result;
     }
-    
-    function lists_count($param)
+
+    function update($params)
     {
-        $where = array();
-        
-        $this->db->select($this->table_id);
-        $this->db->from($this->table);
-        $this->db->where($where);
-        $query = $this->db->count_all_results();
-        return $query;
+        $result = null;
+        $url = $this->config->item('safetra_api'). $this->page . '/update';
+        $params = array_merge($params, $this->key);
+        $result = $this->rest->post($url, $params);
+		return $result;
     }
 }

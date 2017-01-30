@@ -73,7 +73,7 @@ class Admin extends CI_Controller {
 
         $get = $this->admin_model->info(array('id_admin' => $data['id']));
 
-        if ($get->num_rows() > 0)
+        if ($get->code == 200)
         {
             if ($this->input->post('delete') == TRUE)
             {
@@ -123,7 +123,7 @@ class Admin extends CI_Controller {
         $total = $this->admin_model->lists_count(array());
 		$jsonData = array('total' => $total, 'results' => array());
 
-        foreach ($query->result() as $row)
+        foreach ($query->result as $row)
         {
             $action = '<a title="View" id="'.$row->id_admin.'" class="view '.$row->id_admin.'-view" href="#"><i class="fa fa-file-text font16"></i></a>&nbsp;
 						<a title="Edit" href="admin_edit?id='.$row->id_admin.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
@@ -158,7 +158,7 @@ class Admin extends CI_Controller {
 	{
 		$query = $this->admin_model->info(array('email' => $this->input->post('email')));
 		
-		if ($query->num_rows() > 0)
+		if ($query->code == 200)
 		{
 			$this->form_validation->set_message('check_email', 'Email sudah terdaftar');
 			return FALSE;
@@ -198,7 +198,7 @@ class Admin extends CI_Controller {
 	{
 		$query = $this->admin_model->info(array('username' => $this->input->post('username')));
 		
-		if ($query->num_rows() > 0)
+		if ($query->code == 200)
 		{
 			$this->form_validation->set_message('check_username', 'Username sudah terdaftar');
 			return FALSE;

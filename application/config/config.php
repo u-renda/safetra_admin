@@ -519,12 +519,19 @@ if(is_bool(LOCALHOST) || LOCALHOST == 'localhost')
 {
     $config['upload_url'] = 'http://localhost/safetra/upload_safetra/';
     $config['upload_dir'] =  $_SERVER['DOCUMENT_ROOT'].'/safetra/upload_safetra/';
+    
+    define('API_HOST', 'http://localhost/safetra_api/');
 }
 else
 {
     $config['upload_url'] = 'http://safetra.co.id/upload_safetra/';
     $config['upload_dir'] = $_SERVER['DOCUMENT_ROOT'].'/upload_safetra/';
+    
+    define('API_HOST', 'http://api.safetra.co.id/');
 }
+
+$config['safetra_api'] = API_HOST;
+$config['safetra_key'] = 'bd6fb882067e6ok56GR93376cd411ee';
 
 // LINK
 $config['link_admin_create'] = $config['base_url'].'admin_create';
@@ -537,7 +544,7 @@ $config['link_company_create'] = $config['base_url'].'company_create';
 $config['link_company_lists'] = $config['base_url'].'company_lists';
 $config['link_dashboard'] = $config['base_url'].'home/dashboard';
 $config['link_forget_password'] = $config['base_url'].'forget_password';
-$config['link_login'] = $config['base_url'].'login';
+$config['link_login'] = $config['base_url'].'index';
 $config['link_logout'] = $config['base_url'].'logout';
 $config['link_media_album_create'] = $config['base_url'].'media_album_create';
 $config['link_media_album_lists'] = $config['base_url'].'media_album_lists';

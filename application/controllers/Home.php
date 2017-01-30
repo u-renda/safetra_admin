@@ -22,7 +22,7 @@ class Home extends CI_Controller {
 	
 	function total_article()
 	{
-		$query = $this->article_model->lists_count(array());
+		$query = $this->article_model->lists(array())->count;
 		return $query;		
 	}
 }

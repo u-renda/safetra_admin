@@ -63,7 +63,7 @@ class Client extends CI_Controller {
 
         $get = $this->client_model->info(array('id_client' => $data['id']));
 
-        if ($get->num_rows() > 0)
+        if ($get->code == 200)
         {
             if ($this->input->post('delete') == TRUE)
             {
@@ -113,7 +113,7 @@ class Client extends CI_Controller {
         $total = $this->client_model->lists_count(array());
 		$jsonData = array('total' => $total, 'results' => array());
 
-        foreach ($query->result() as $row)
+        foreach ($query->result as $row)
         {
             $action = '<a title="View" id="'.$row->id_client.'" class="view '.$row->id_client.'-view" href="#"><i class="fa fa-file-text font16"></i></a>&nbsp;
 						<a title="Edit" href="client_edit?id='.$row->id_client.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;

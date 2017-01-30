@@ -73,7 +73,7 @@ $route['company_delete'] = 'company/company_delete';
 $route['company_get'] = 'company/company_get';
 $route['company_lists'] = 'company/company_lists';
 
-$route['forget_password'] = 'login/forget_password';
+$route['index'] = 'login/index';
 $route['logout'] = 'login/logout';
 
 $route['media_album_create'] = 'media/media_album_create';
