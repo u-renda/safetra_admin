@@ -73,6 +73,9 @@ $route['company_delete'] = 'company/company_delete';
 $route['company_get'] = 'company/company_get';
 $route['company_lists'] = 'company/company_lists';
 
+$route['check_admin_email'] = 'extra/check_admin_email';
+$route['check_admin_username'] = 'extra/check_admin_username';
+
 $route['index'] = 'login/index';
 $route['logout'] = 'login/logout';
 
@@ -107,6 +110,11 @@ $route['program_sub_create'] = 'program/program_sub_create';
 $route['program_sub_delete'] = 'program/program_sub_delete';
 $route['program_sub_get'] = 'program/program_sub_get';
 $route['program_sub_lists'] = 'program/program_sub_lists';
+
+$route['slider_create'] = 'slider/slider_create';
+$route['slider_delete'] = 'slider/slider_delete';
+$route['slider_get'] = 'slider/slider_get';
+$route['slider_lists'] = 'slider/slider_lists';
 
 $route['testimony_create'] = 'testimony/testimony_create';
 $route['testimony_delete'] = 'testimony/testimony_delete';

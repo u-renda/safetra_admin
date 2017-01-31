@@ -37,8 +37,6 @@ class Company extends CI_Controller {
 				$param['pic_name'] = $this->input->post('pic_name');
 				$param['logo'] = $this->processMedia;
 				$param['phone_number'] = $this->input->post('phone_number');
-				$param['created_date'] = date('Y-m-d H:i:s');
-				$param['updated_date'] = date('Y-m-d H:i:s');
 				$query = $this->company_model->create($param);
 				
 				if ($query > 0)
@@ -112,8 +110,7 @@ class Company extends CI_Controller {
         }
 
         $query = $this->company_model->lists(array('limit' => $pageSize, 'offset' => $offset, 'order' => $order, 'sort' => $sort));
-        $total = $this->company_model->lists_count(array());
-		$jsonData = array('total' => $total, 'results' => array());
+        $jsonData = array('total' => $query->total, 'results' => array());
 
         foreach ($query->result as $row)
         {

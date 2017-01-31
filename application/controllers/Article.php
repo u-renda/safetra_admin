@@ -50,8 +50,6 @@ class Article extends CI_Controller {
 				$param['content'] = $this->input->post('content');
 				$param['media'] = $this->processMedia;
 				$param['tags'] = $this->input->post('tags');
-				$param['created_date'] = date('Y-m-d H:i:s');
-				$param['updated_date'] = date('Y-m-d H:i:s');
 				$query = $this->article_model->create($param);
 				
 				if ($query > 0)
@@ -125,8 +123,7 @@ class Article extends CI_Controller {
         }
 
         $query = $this->article_model->lists(array('limit' => $pageSize, 'offset' => $offset, 'order' => $order, 'sort' => $sort));
-        $total = $this->article_model->lists_count(array());
-		$jsonData = array('total' => $total, 'results' => array());
+        $jsonData = array('total' => $query->total, 'results' => array());
 
         foreach ($query->result as $row)
         {

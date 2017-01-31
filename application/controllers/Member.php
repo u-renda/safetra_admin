@@ -40,8 +40,6 @@ class Member extends CI_Controller {
 				$param['password'] = md5($this->input->post('password'));
 				$param['phone_number'] = $this->input->post('phone_number');
 				$param['status'] = 1;
-				$param['created_date'] = date('Y-m-d H:i:s');
-				$param['updated_date'] = date('Y-m-d H:i:s');
 				$query = $this->member_model->create($param);
 				
 				if ($query > 0)
@@ -114,8 +112,7 @@ class Member extends CI_Controller {
         }
 
         $query = $this->member_model->lists(array('limit' => $pageSize, 'offset' => $offset, 'order' => $order, 'sort' => $sort));
-        $total = $this->member_model->lists_count(array());
-		$jsonData = array('total' => $total, 'results' => array());
+        $jsonData = array('total' => $query->total, 'results' => array());
 
         foreach ($query->result as $row)
         {

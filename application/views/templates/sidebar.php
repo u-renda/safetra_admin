@@ -58,7 +58,7 @@
                     </li>
                     <li class="nav-parent list-parent">
                         <a>
-                            <i class="fa fa-slack" aria-hidden="true"></i>
+                            <i class="fa fa-empire" aria-hidden="true"></i>
                             <span>Client</span>
                         </a>
                         <ul class="nav nav-children">
@@ -123,6 +123,24 @@
                             </li>
                             <li class="list-child">
                                 <a href="<?php echo $this->config->item('link_member_create'); ?>">
+                                     Create
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-parent list-parent">
+                        <a>
+                            <i class="fa fa-sliders" aria-hidden="true"></i>
+                            <span>Slider</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li class="list-child">
+                                <a href="<?php echo $this->config->item('link_slider_lists'); ?>">
+                                     Lists
+                                </a>
+                            </li>
+                            <li class="list-child">
+                                <a href="<?php echo $this->config->item('link_slider_create'); ?>">
                                      Create
                                 </a>
                             </li>

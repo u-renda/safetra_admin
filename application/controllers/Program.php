@@ -61,8 +61,6 @@ class Program extends CI_Controller {
 				$param['name'] = $this->input->post('name');
 				$param['slug'] = $slug;
 				$param['percentage'] = $this->input->post('percentage');
-				$param['created_date'] = date('Y-m-d H:i:s');
-				$param['updated_date'] = date('Y-m-d H:i:s');
 				$query = $this->program_model->create($param);
 				
 				if ($query > 0)
@@ -136,8 +134,7 @@ class Program extends CI_Controller {
         }
 
         $query = $this->program_model->lists(array('limit' => $pageSize, 'offset' => $offset, 'order' => $order, 'sort' => $sort));
-        $total = $this->program_model->lists_count(array());
-		$jsonData = array('total' => $total, 'results' => array());
+        $jsonData = array('total' => $query->total, 'results' => array());
 
         foreach ($query->result as $row)
         {
@@ -209,8 +206,6 @@ class Program extends CI_Controller {
 				$param['requirements_of_participant'] = $this->input->post('requirements_of_participant');
 				$param['training_material'] = $this->input->post('training_material');
 				$param['others'] = $this->input->post('others');
-				$param['created_date'] = date('Y-m-d H:i:s');
-				$param['updated_date'] = date('Y-m-d H:i:s');
 				$query = $this->program_sub_model->create($param);
 				
 				if ($query > 0)

@@ -34,7 +34,8 @@
 			
 			<!-- Theme Custom -->
 			<script src="<?php echo base_url('assets/js').'/app.js'; ?>"></script>
-			
+			<script src="<?php echo base_url('assets/js').'/app-table.js'; ?>"></script>
+ 			
 			<!-- Theme Initialization Files -->
 			<script src="<?php echo base_url('assets/js').'/theme.init.js'; ?>"></script>
 

@@ -38,23 +38,21 @@ class Admin extends CI_Controller {
 				$param = array();
 				$param['name'] = $this->input->post('name');
 				$param['username'] = $this->input->post('username');
-				$param['password'] = md5($this->input->post('password'));
+				$param['password'] = $this->input->post('password');
 				$param['email'] = $this->input->post('email');
 				$param['photo'] = $this->processMedia;
 				$param['status'] = 1;
 				$param['role'] = $this->input->post('role');
 				$param['job_title'] = $this->input->post('job_title');
-				$param['created_date'] = date('Y-m-d H:i:s');
-				$param['updated_date'] = date('Y-m-d H:i:s');
 				$query = $this->admin_model->create($param);
 				
-				if ($query > 0)
+				if ($query->code == 200)
 				{
-					redirect($this->config->item('link_admin_lists'));
+					redirect($this->config->item('link_admin_lists').'?msg=success&type=create');
 				}
 				else
 				{
-					$data['error_save'] = 'Failed Create Data';
+					redirect($this->config->item('link_admin_lists').'?msg=error&type=create');
 				}
 			}
 		}
@@ -70,16 +68,16 @@ class Admin extends CI_Controller {
         $data['id'] = $this->input->post('id');
         $data['action'] = $this->input->post('action');
         $data['grid'] = $this->input->post('grid');
-
+		
         $get = $this->admin_model->info(array('id_admin' => $data['id']));
 
         if ($get->code == 200)
         {
             if ($this->input->post('delete') == TRUE)
             {
-                $query = $this->admin_model->delete($data['id']);
+                $query = $this->admin_model->delete(array('id_admin' => $data['id']));
 
-                if ($query > 0)
+                if ($query->code == 200)
                 {
                     $response =  array('msg' => 'Delete data success', 'type' => 'success');
                 }
@@ -120,8 +118,7 @@ class Admin extends CI_Controller {
         }
 
         $query = $this->admin_model->lists(array('limit' => $pageSize, 'offset' => $offset, 'order' => $order, 'sort' => $sort));
-        $total = $this->admin_model->lists_count(array());
-		$jsonData = array('total' => $total, 'results' => array());
+		$jsonData = array('total' => $query->total, 'results' => array());
 
         foreach ($query->result as $row)
         {
@@ -150,6 +147,8 @@ class Admin extends CI_Controller {
 	function admin_lists()
 	{
 		$data = array();
+		$data['type'] = $this->input->get('type');
+		$data['msg'] = $this->input->get('msg');
 		$data['view_content'] = 'admin/admin_lists';
 		$this->load->view('templates/frame', $data);
 	}

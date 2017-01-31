@@ -46,8 +46,6 @@ class Preferences extends CI_Controller {
 				$param['name'] = $this->input->post('name');
 				$param['slug'] = $slug;
 				$param['content'] = $this->input->post('content');
-				$param['created_date'] = date('Y-m-d H:i:s');
-				$param['updated_date'] = date('Y-m-d H:i:s');
 				$query = $this->preferences_model->create($param);
 				
 				if ($query > 0)
@@ -121,8 +119,7 @@ class Preferences extends CI_Controller {
         }
 
         $query = $this->preferences_model->lists(array('limit' => $pageSize, 'offset' => $offset, 'order' => $order, 'sort' => $sort));
-        $total = $this->preferences_model->lists_count(array());
-		$jsonData = array('total' => $total, 'results' => array());
+        $jsonData = array('total' => $query->total, 'results' => array());
 
         foreach ($query->result as $row)
         {

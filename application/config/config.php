@@ -517,8 +517,8 @@ $config['proxy_ips'] = '';
 
 if(is_bool(LOCALHOST) || LOCALHOST == 'localhost')
 {
-    $config['upload_url'] = 'http://localhost/safetra/upload_safetra/';
-    $config['upload_dir'] =  $_SERVER['DOCUMENT_ROOT'].'/safetra/upload_safetra/';
+    $config['upload_url'] = 'http://localhost/safetra_web/upload_safetra/';
+    $config['upload_dir'] =  $_SERVER['DOCUMENT_ROOT'].'/safetra_web/upload_safetra/';
     
     define('API_HOST', 'http://localhost/safetra_api/');
 }
@@ -559,6 +559,8 @@ $config['link_program_create'] = $config['base_url'].'program_create';
 $config['link_program_lists'] = $config['base_url'].'program_lists';
 $config['link_program_sub_create'] = $config['base_url'].'program_sub_create';
 $config['link_program_sub_lists'] = $config['base_url'].'program_sub_lists';
+$config['link_slider_create'] = $config['base_url'].'slider_create';
+$config['link_slider_lists'] = $config['base_url'].'slider_lists';
 $config['link_testimony_create'] = $config['base_url'].'testimony_create';
 $config['link_testimony_lists'] = $config['base_url'].'testimony_lists';
 
