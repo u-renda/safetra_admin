@@ -37,13 +37,13 @@ class Testimony extends CI_Controller {
 				$param['testimony'] = $this->input->post('testimony');
 				$query = $this->testimony_model->create($param);
 				
-				if ($query > 0)
+				if ($query->code == 200)
 				{
-					redirect($this->config->item('link_testimony_lists'));
+					redirect($this->config->item('link_testimony_lists').'?msg=success&type=create');
 				}
 				else
 				{
-					$data['error_save'] = 'Failed Create Data';
+					redirect($this->config->item('link_testimony_lists').'?msg=error&type=create');
 				}
 			}
 		}
@@ -65,9 +65,9 @@ class Testimony extends CI_Controller {
         {
             if ($this->input->post('delete') == TRUE)
             {
-                $query = $this->testimony_model->delete($data['id']);
+                $query = $this->testimony_model->delete(array('id_testimony' => $data['id']));
 
-                if ($query > 0)
+                if ($query->code == 200)
                 {
                     $response =  array('msg' => 'Delete data success', 'type' => 'success');
                 }
@@ -142,6 +142,8 @@ class Testimony extends CI_Controller {
 	function testimony_lists()
 	{
 		$data = array();
+		$data['type'] = $this->input->get('type');
+		$data['msg'] = $this->input->get('msg');
 		$data['view_content'] = 'testimony/testimony_lists';
 		$this->load->view('templates/frame', $data);
 	}

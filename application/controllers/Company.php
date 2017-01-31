@@ -39,13 +39,13 @@ class Company extends CI_Controller {
 				$param['phone_number'] = $this->input->post('phone_number');
 				$query = $this->company_model->create($param);
 				
-				if ($query > 0)
+				if ($query->code == 200)
 				{
-					redirect($this->config->item('link_company_lists'));
+					redirect($this->config->item('link_company_lists').'?msg=success&type=create');
 				}
 				else
 				{
-					$data['error_save'] = 'Failed Create Data';
+					redirect($this->config->item('link_company_lists').'?msg=error&type=create');
 				}
 			}
 		}
@@ -67,9 +67,9 @@ class Company extends CI_Controller {
         {
             if ($this->input->post('delete') == TRUE)
             {
-                $query = $this->company_model->delete($data['id']);
+                $query = $this->company_model->delete(array('id_company' => $data['id']));
 
-                if ($query > 0)
+                if ($query->code == 200)
                 {
                     $response =  array('msg' => 'Delete data success', 'type' => 'success');
                 }
@@ -136,6 +136,8 @@ class Company extends CI_Controller {
 	function company_lists()
 	{
 		$data = array();
+		$data['type'] = $this->input->get('type');
+		$data['msg'] = $this->input->get('msg');
 		$data['view_content'] = 'company/company_lists';
 		$this->load->view('templates/frame', $data);
 	}

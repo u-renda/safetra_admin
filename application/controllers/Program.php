@@ -14,20 +14,6 @@ class Program extends CI_Controller {
 		if ($this->session->userdata('is_login') == FALSE) { redirect($this->config->item('link_login')); }
     }
 	
-	function check_slug($param)
-	{
-		$query = $this->program_sub_model->info(array('slug' => $param));
-		
-		if ($query->code == 200)
-		{
-			return FALSE;
-		}
-		else
-		{
-			return TRUE;
-		}
-	}
-	
 	function program_create()
 	{
 		$data = array();
@@ -38,6 +24,10 @@ class Program extends CI_Controller {
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 			$this->form_validation->set_rules('name', 'Name', 'required');
 			$this->form_validation->set_rules('percentage', 'Percentage', 'required');
+			$this->form_validation->set_rules('program_objective', 'Tujuan Program', 'required');
+			$this->form_validation->set_rules('training_purpose', 'Tujuan Pelatihan', 'required');
+			$this->form_validation->set_rules('requirements_of_participant', 'Persyaratan Peserta', 'required');
+			$this->form_validation->set_rules('training_material', 'Materi Pelatihan', 'required');
 			
 			if ($this->form_validation->run() == FALSE)
 			{
@@ -45,31 +35,23 @@ class Program extends CI_Controller {
 			}
 			else
 			{
-				$url_title = url_title(strtolower($this->input->post('name')));
-				
-				if ($this->check_slug($url_title) == FALSE)
-				{
-					$counter = random_string('numeric',5);
-					$slug = url_title(strtolower(''.$title.'-'.$counter.''));
-				}
-				else
-				{
-					$slug = $url_title;
-				}
-				
 				$param = array();
 				$param['name'] = $this->input->post('name');
-				$param['slug'] = $slug;
 				$param['percentage'] = $this->input->post('percentage');
+				$param['program_objective'] = $this->input->post('program_objective');
+				$param['training_purpose'] = $this->input->post('training_purpose');
+				$param['requirements_of_participant'] = $this->input->post('requirements_of_participant');
+				$param['training_material'] = $this->input->post('training_material');
+				$param['others'] = $this->input->post('others');
 				$query = $this->program_model->create($param);
 				
-				if ($query > 0)
+				if ($query->code == 200)
 				{
-					redirect($this->config->item('link_program_lists'));
+					redirect($this->config->item('link_program_lists').'?msg=success&type=create');
 				}
 				else
 				{
-					$data['error_save'] = 'Failed Create Data';
+					redirect($this->config->item('link_program_lists').'?msg=error&type=create');
 				}
 			}
 		}
@@ -91,9 +73,9 @@ class Program extends CI_Controller {
         {
             if ($this->input->post('delete') == TRUE)
             {
-                $query = $this->program_model->delete($data['id']);
+                $query = $this->program_model->delete(array('id_program' => $data['id']));
 
-                if ($query > 0)
+                if ($query->code == 200)
                 {
                     $response =  array('msg' => 'Delete data success', 'type' => 'success');
                 }
@@ -160,6 +142,8 @@ class Program extends CI_Controller {
 	function program_lists()
 	{
 		$data = array();
+		$data['type'] = $this->input->get('type');
+		$data['msg'] = $this->input->get('msg');
 		$data['view_content'] = 'program/program_lists';
 		$this->load->view('templates/frame', $data);
 	}
@@ -185,22 +169,9 @@ class Program extends CI_Controller {
 			}
 			else
 			{
-				$url_title = url_title(strtolower($this->input->post('name')));
-				
-				if ($this->check_slug($url_title) == FALSE)
-				{
-					$counter = random_string('numeric',5);
-					$slug = url_title(strtolower(''.$title.'-'.$counter.''));
-				}
-				else
-				{
-					$slug = $url_title;
-				}
-				
 				$param = array();
 				$param['id_program'] = $id_program;
 				$param['name'] = $this->input->post('name');
-				$param['slug'] = $slug;
 				$param['program_objective'] = $this->input->post('program_objective');
 				$param['training_purpose'] = $this->input->post('training_purpose');
 				$param['requirements_of_participant'] = $this->input->post('requirements_of_participant');
@@ -208,13 +179,13 @@ class Program extends CI_Controller {
 				$param['others'] = $this->input->post('others');
 				$query = $this->program_sub_model->create($param);
 				
-				if ($query > 0)
+				if ($query->code == 200)
 				{
-					redirect($this->config->item('link_program_sub_lists').'?id='.$id_program);
+					redirect($this->config->item('link_program_sub_lists').'?msg=success&type=create');
 				}
 				else
 				{
-					$data['error_save'] = 'Failed Create Data';
+					redirect($this->config->item('link_program_sub_lists').'?msg=error&type=create');
 				}
 			}
 		}
@@ -243,9 +214,9 @@ class Program extends CI_Controller {
         {
             if ($this->input->post('delete') == TRUE)
             {
-                $query = $this->program_sub_model->delete($data['id']);
+                $query = $this->program_sub_model->delete(array('id_program_sub' => $data['id']));
 
-                if ($query > 0)
+                if ($query->code == 200)
                 {
                     $response =  array('msg' => 'Delete data success', 'type' => 'success');
                 }
@@ -321,6 +292,8 @@ class Program extends CI_Controller {
 			$data['program'] = $query2->result;
 		}
 		
+		$data['type'] = $this->input->get('type');
+		$data['msg'] = $this->input->get('msg');
 		$data['view_content'] = 'program/program_sub_lists';
 		$this->load->view('templates/frame', $data);
 	}

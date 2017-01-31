@@ -30,31 +30,18 @@ class Preferences extends CI_Controller {
 			}
 			else
 			{
-				$url_title = url_title(strtolower($this->input->post('title')));
-				
-				if ($this->check_slug($url_title) == FALSE)
-				{
-					$counter = random_string('numeric',5);
-					$slug = url_title(strtolower(''.$title.'-'.$counter.''));
-				}
-				else
-				{
-					$slug = $url_title;
-				}
-				
 				$param = array();
 				$param['name'] = $this->input->post('name');
-				$param['slug'] = $slug;
 				$param['content'] = $this->input->post('content');
 				$query = $this->preferences_model->create($param);
 				
-				if ($query > 0)
+				if ($query->code == 200)
 				{
-					redirect($this->config->item('link_preferences_lists'));
+					redirect($this->config->item('link_preferences_lists').'?msg=success&type=create');
 				}
 				else
 				{
-					$data['error_save'] = 'Failed Create Data';
+					redirect($this->config->item('link_preferences_lists').'?msg=error&type=create');
 				}
 			}
 		}
@@ -76,9 +63,9 @@ class Preferences extends CI_Controller {
         {
             if ($this->input->post('delete') == TRUE)
             {
-                $query = $this->preferences_model->delete($data['id']);
+                $query = $this->preferences_model->delete(array('id_preferences' => $data['id']));
 
-                if ($query > 0)
+                if ($query->code == 200)
                 {
                     $response =  array('msg' => 'Delete data success', 'type' => 'success');
                 }
@@ -152,21 +139,9 @@ class Preferences extends CI_Controller {
 	function preferences_lists()
 	{
 		$data = array();
+		$data['type'] = $this->input->get('type');
+		$data['msg'] = $this->input->get('msg');
 		$data['view_content'] = 'preferences/preferences_lists';
 		$this->load->view('templates/frame', $data);
-	}
-	
-	function check_slug($param)
-	{
-		$query = $this->preferences_model->info(array('slug' => $param));
-		
-		if ($query->code == 200)
-		{
-			return FALSE;
-		}
-		else
-		{
-			return TRUE;
-		}
 	}
 }

@@ -37,13 +37,13 @@ class Client extends CI_Controller {
 				$param['logo'] = $this->processMedia;
 				$query = $this->client_model->create($param);
 				
-				if ($query > 0)
+				if ($query->code == 200)
 				{
-					redirect($this->config->item('link_client_lists'));
+					redirect($this->config->item('link_client_lists').'?msg=success&type=create');
 				}
 				else
 				{
-					$data['error_save'] = 'Failed Create Data';
+					redirect($this->config->item('link_client_lists').'?msg=error&type=create');
 				}
 			}
 		}
@@ -65,9 +65,9 @@ class Client extends CI_Controller {
         {
             if ($this->input->post('delete') == TRUE)
             {
-                $query = $this->client_model->delete($data['id']);
+                $query = $this->client_model->delete(array('id_client' => $data['id']));
 
-                if ($query > 0)
+                if ($query->code == 200)
                 {
                     $response =  array('msg' => 'Delete data success', 'type' => 'success');
                 }
@@ -133,6 +133,8 @@ class Client extends CI_Controller {
 	function client_lists()
 	{
 		$data = array();
+		$data['type'] = $this->input->get('type');
+		$data['msg'] = $this->input->get('msg');
 		$data['view_content'] = 'client/client_lists';
 		$this->load->view('templates/frame', $data);
 	}

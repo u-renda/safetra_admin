@@ -32,33 +32,20 @@ class Article extends CI_Controller {
 			}
 			else
 			{
-				$url_title = url_title(strtolower($this->input->post('title')));
-				
-				if ($this->check_slug($url_title) == FALSE)
-				{
-					$counter = random_string('numeric',5);
-					$slug = url_title(strtolower(''.$title.'-'.$counter.''));
-				}
-				else
-				{
-					$slug = $url_title;
-				}
-				
 				$param = array();
 				$param['title'] = $this->input->post('title');
-				$param['slug'] = $slug;
 				$param['content'] = $this->input->post('content');
 				$param['media'] = $this->processMedia;
 				$param['tags'] = $this->input->post('tags');
 				$query = $this->article_model->create($param);
 				
-				if ($query > 0)
+				if ($query->code == 200)
 				{
-					redirect($this->config->item('link_article_lists'));
+					redirect($this->config->item('link_article_lists').'?msg=success&type=create');
 				}
 				else
 				{
-					$data['error_save'] = 'Failed Create Data';
+					redirect($this->config->item('link_article_lists').'?msg=error&type=create');
 				}
 			}
 		}
@@ -80,9 +67,9 @@ class Article extends CI_Controller {
         {
             if ($this->input->post('delete') == TRUE)
             {
-                $query = $this->article_model->delete($data['id']);
+                $query = $this->article_model->delete(array('id_article' => $data['id']));
 
-                if ($query > 0)
+                if ($query->code == 200)
                 {
                     $response =  array('msg' => 'Delete data success', 'type' => 'success');
                 }
@@ -156,6 +143,8 @@ class Article extends CI_Controller {
 	function article_lists()
 	{
 		$data = array();
+		$data['type'] = $this->input->get('type');
+		$data['msg'] = $this->input->get('msg');
 		$data['view_content'] = 'article/article_lists';
 		$this->load->view('templates/frame', $data);
 	}
@@ -181,20 +170,6 @@ class Article extends CI_Controller {
 		else
 		{
 			$this->processMedia = '';
-			return TRUE;
-		}
-	}
-	
-	function check_slug($param)
-	{
-		$query = $this->article_model->info(array('slug' => $param));
-		
-		if ($query->code == 200)
-		{
-			return FALSE;
-		}
-		else
-		{
 			return TRUE;
 		}
 	}

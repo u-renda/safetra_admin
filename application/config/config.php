@@ -525,7 +525,7 @@ if(is_bool(LOCALHOST) || LOCALHOST == 'localhost')
 else
 {
     $config['upload_url'] = 'http://safetra.co.id/upload_safetra/';
-    $config['upload_dir'] = $_SERVER['DOCUMENT_ROOT'].'/upload_safetra/';
+    $config['upload_dir'] = '/home/u6124654/public_html/upload_safetra/';
     
     define('API_HOST', 'http://api.safetra.co.id/');
 }

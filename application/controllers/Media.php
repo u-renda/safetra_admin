@@ -14,6 +14,50 @@ class Media extends CI_Controller {
 		if ($this->session->userdata('is_login') == FALSE) { redirect($this->config->item('link_login')); }
     }
 	
+	function check_media()
+	{
+		$media = array();
+		$total = count($_FILES['media']['name']);
+		
+		for ($i=0; $i<$total; $i++)
+		{
+			if ($_FILES["media"]["error"][$i] == 0)
+			{
+				$this->load->helper('my');
+				
+				$temp = array();
+				$temp['name'] = $_FILES['media']['name'][$i];
+				$temp['type'] = $_FILES['media']['type'][$i];
+				$temp['tmp_name'] = $_FILES['media']['tmp_name'][$i];
+				$temp['error'] = $_FILES['media']['error'][$i];
+				$temp['size'] = $_FILES['media']['size'][$i];
+				
+				$photo = upload_image($temp);
+				
+				if (is_array($photo) == FALSE)
+				{
+					$media[$i] = $photo;
+				}
+				else
+				{
+					$this->form_validation->set_message('check_media', $photo[0]);
+					return FALSE;
+				}
+			}
+		}
+		
+		if (count($media) == 0)
+		{
+			$this->form_validation->set_message('check_media', $photo[0]);
+			return FALSE;
+		}
+		else
+		{
+			$this->processMedia = $media;
+			return TRUE;
+		}
+	}
+	
 	function media_album_create()
 	{
 		$data = array();
@@ -31,44 +75,27 @@ class Media extends CI_Controller {
 			}
 			else
 			{
-				$url_title = url_title(strtolower($this->input->post('name')));
-				
-				if ($this->check_slug($url_title) == FALSE)
-				{
-					$counter = random_string('numeric',5);
-					$slug = url_title(strtolower(''.$this->input->post('name').'-'.$counter.''));
-				}
-				else
-				{
-					$slug = $url_title;
-				}
-				
 				// save media album
 				$param = array();
 				$param['name'] = $this->input->post('name');
-				$param['slug'] = $slug;
-				$param['created_date'] = date('Y-m-d H:i:s');
-				$param['updated_date'] = date('Y-m-d H:i:s');
 				$query = $this->media_album_model->create($param);
 				
-				if ($query != 0 || $query != '')
+				if ($query->code == 200)
 				{
 					// save media
 					foreach ($this->processMedia as $key => $val)
 					{
 						$param2 = array();
-						$param2['id_media_album'] = $query;
+						$param2['id_media_album'] = $query->result->id_media_album;
 						$param2['media_url'] = $val;
-						$param2['created_date'] = date('Y-m-d H:i:s');
-						$param2['updated_date'] = date('Y-m-d H:i:s');
 						$query2 = $this->media_model->create($param2);
 					}
 					
-					redirect($this->config->item('link_media_album_lists'));
+					redirect($this->config->item('link_media_album_lists').'?msg=success&type=create');
 				}
 				else
 				{
-					$data['error_save'] = 'Failed Create Data';
+					redirect($this->config->item('link_media_album_lists').'?msg=error&type=create');
 				}
 			}
 		}
@@ -77,58 +104,42 @@ class Media extends CI_Controller {
 		$this->load->view('templates/frame', $data);
 	}
 	
-	function media_create()
+	function media_album_delete()
 	{
 		$data = array();
-		
-		if ($this->input->post('submit') == TRUE)
-		{
-			$this->load->library('form_validation');
-			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-			$this->form_validation->set_rules('media_album', 'Media Album', 'required');
-			$this->form_validation->set_rules('content', 'Content', 'required');
-			$this->form_validation->set_rules('tags', 'Tags', 'required');
-			$this->form_validation->set_rules('media', 'Media', 'callback_check_media');
-			
-			if ($this->form_validation->run() == FALSE)
-			{
-				validation_errors();
-			}
-			else
-			{
-				$url_title = url_title(strtolower($this->input->post('title')));
-				
-				if ($this->check_slug($url_title) == FALSE)
-				{
-					$counter = random_string('numeric',5);
-					$slug = url_title(strtolower(''.$title.'-'.$counter.''));
-				}
-				else
-				{
-					$slug = $url_title;
-				}
-				
-				$param = array();
-				$param['title'] = $this->input->post('title');
-				$param['slug'] = $slug;
-				$param['content'] = $this->input->post('content');
-				$param['media'] = $this->processMedia;
-				$param['tags'] = $this->input->post('tags');
-				$query = $this->media_model->create($param);
-				
-				if ($query > 0)
-				{
-					redirect($this->config->item('link_media_lists'));
-				}
-				else
-				{
-					$data['error_save'] = 'Failed Create Data';
-				}
-			}
-		}
-		
-		$data['view_content'] = 'media/media_create';
-		$this->load->view('templates/frame', $data);
+        $data['id'] = $this->input->post('id');
+        $data['action'] = $this->input->post('action');
+        $data['grid'] = $this->input->post('grid');
+
+        $get = $this->media_album_model->info(array('id_media_album' => $data['id']));
+
+        if ($get->code == 200)
+        {
+            if ($this->input->post('delete') == TRUE)
+            {
+                $query = $this->media_album_model->delete(array('id_media_album' => $data['id']));
+
+                if ($query->code == 200)
+                {
+                    $response =  array('msg' => 'Delete data success', 'type' => 'success');
+                }
+                else
+                {
+                    $response =  array('msg' => 'Delete data failed', 'type' => 'error');
+                }
+
+                echo json_encode($response);
+                exit();
+            }
+            else
+            {
+                $this->load->view('delete_confirm', $data);
+            }
+        }
+        else
+        {
+            echo "Data Not Found";
+        }
 	}
 
     function media_album_get()
@@ -173,65 +184,47 @@ class Media extends CI_Controller {
 	function media_album_lists()
 	{
 		$data = array();
+		$data['type'] = $this->input->get('type');
+		$data['msg'] = $this->input->get('msg');
 		$data['view_content'] = 'media/media_album_lists';
 		$this->load->view('templates/frame', $data);
 	}
 	
-	function check_media()
+	function media_delete()
 	{
-		$media = array();
-		$total = count($_FILES['media']['name']);
-		
-		for ($i=0; $i<$total; $i++)
-		{
-			if ($_FILES["media"]["error"][$i] == 0)
-			{
-				$this->load->helper('my');
-				
-				$temp = array();
-				$temp['name'] = $_FILES['media']['name'][$i];
-				$temp['type'] = $_FILES['media']['type'][$i];
-				$temp['tmp_name'] = $_FILES['media']['tmp_name'][$i];
-				$temp['error'] = $_FILES['media']['error'][$i];
-				$temp['size'] = $_FILES['media']['size'][$i];
-				
-				$photo = upload_image($temp, TRUE);
-				
-				if (is_array($photo) == FALSE)
-				{
-					$media[$i] = $photo;
-				}
-				else
-				{
-					$this->form_validation->set_message('check_media', $photo[0]);
-					return FALSE;
-				}
-			}
-		}
-		
-		if (count($media) == 0)
-		{
-			$this->form_validation->set_message('check_media', $photo[0]);
-			return FALSE;
-		}
-		else
-		{
-			$this->processMedia = $media;
-			return TRUE;
-		}
-	}
-	
-	function check_slug($param)
-	{
-		$query = $this->media_album_model->info(array('slug' => $param));
-		
-		if ($query->code == 200)
-		{
-			return FALSE;
-		}
-		else
-		{
-			return TRUE;
-		}
+		$data = array();
+        $data['id'] = $this->input->post('id');
+        $data['action'] = $this->input->post('action');
+        $data['grid'] = $this->input->post('grid');
+
+        $get = $this->media_model->info(array('id_media' => $data['id']));
+
+        if ($get->code == 200)
+        {
+            if ($this->input->post('delete') == TRUE)
+            {
+                $query = $this->media_model->delete(array('id_media' => $data['id']));
+
+                if ($query->code == 200)
+                {
+                    $response =  array('msg' => 'Delete data success', 'type' => 'success');
+                }
+                else
+                {
+                    $response =  array('msg' => 'Delete data failed', 'type' => 'error');
+                }
+
+                echo json_encode($response);
+                exit();
+            }
+            else
+            {
+                $this->load->view('delete_confirm', $data);
+            }
+        }
+        else
+        {
+            echo "Data Not Found";
+        }
 	}
 }

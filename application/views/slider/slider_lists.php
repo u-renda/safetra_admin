@@ -24,6 +24,23 @@
                     <h2 class="panel-title">Slider Lists</h2>
                 </header>
                 <div class="panel-body">
+                    <?php
+                    if ($msg == TRUE)
+                    {
+                        if ($msg == 'success')
+                        {
+                            echo '<div class="alert alert-success">';
+                            echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+                            echo 'Success '.$type.' data! </div>';
+                        }
+                        else
+                        {
+                            echo '<div class="alert alert-danger">';
+                            echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>';
+                            echo 'Failed '.$type.' data! </div>';
+                        }
+                    }
+                    ?>
                     <div id="multipleTable"></div>
                 </div>
             </section>

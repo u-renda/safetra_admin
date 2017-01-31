@@ -8,6 +8,7 @@ class Member extends CI_Controller {
 	function __construct()
     {
         parent::__construct();
+		$this->load->model('company_model');
 		$this->load->model('member_model');
 		
 		if ($this->session->userdata('is_login') == FALSE) { redirect($this->config->item('link_login')); }
@@ -21,7 +22,7 @@ class Member extends CI_Controller {
 		{
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-			$this->form_validation->set_rules('id_company', 'ID COmpany', 'required');
+			$this->form_validation->set_rules('id_company', 'ID Company', 'required');
 			$this->form_validation->set_rules('name', 'Name', 'required');
 			$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 			$this->form_validation->set_rules('password', 'Password', 'required');
@@ -37,22 +38,31 @@ class Member extends CI_Controller {
 				$param['id_company'] = $this->input->post('id_company');
 				$param['name'] = $this->input->post('name');
 				$param['email'] = $this->input->post('email');
-				$param['password'] = md5($this->input->post('password'));
+				$param['password'] = $this->input->post('password');
 				$param['phone_number'] = $this->input->post('phone_number');
 				$param['status'] = 1;
 				$query = $this->member_model->create($param);
 				
-				if ($query > 0)
+				if ($query->code == 200)
 				{
-					redirect($this->config->item('link_member_lists'));
+					redirect($this->config->item('link_member_lists').'?msg=success&type=create');
 				}
 				else
 				{
-					$data['error_save'] = 'Failed Create Data';
+					redirect($this->config->item('link_member_lists').'?msg=error&type=create');
 				}
 			}
 		}
 		
+		$query2 = $this->company_model->lists(array());
+		$company = array();
+		
+		if ($query2->code == 200)
+		{
+			$company = $query2->result;
+		}
+		
+		$data['company_lists'] = (object) $company;
 		$data['view_content'] = 'member/member_create';
 		$this->load->view('templates/frame', $data);
 	}
@@ -70,9 +80,9 @@ class Member extends CI_Controller {
         {
             if ($this->input->post('delete') == TRUE)
             {
-                $query = $this->member_model->delete($data['id']);
+                $query = $this->member_model->delete(array('id_member' => $data['id']));
 
-                if ($query > 0)
+                if ($query->code == 200)
                 {
                     $response =  array('msg' => 'Delete data success', 'type' => 'success');
                 }
@@ -139,6 +149,8 @@ class Member extends CI_Controller {
 	function member_lists()
 	{
 		$data = array();
+		$data['type'] = $this->input->get('type');
+		$data['msg'] = $this->input->get('msg');
 		$data['view_content'] = 'member/member_lists';
 		$this->load->view('templates/frame', $data);
 	}

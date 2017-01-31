@@ -608,7 +608,7 @@ $(function () {
         
         $('body').delegate(".delete", "click", function() {
             var id = $(this).attr("id");
-            var action = "testimony_delete";
+            var action = "media_album_delete";
             var grid = "multipleTable";
             var dataString = 'id='+ id +'&action='+ action +'&grid='+ grid;
             $.ajax(
@@ -738,13 +738,13 @@ $(function () {
                 field: "Status",
                 filterable: false,
                 sortable: false,
-                width: 100
+                width: 60
             },
             {
                 field: "Action",
                 sortable: false,
                 filterable: false,
-                width: 60,
+                width: 80,
                 template: "#= data.Action #"
             }]
         });
@@ -1073,6 +1073,19 @@ $(function () {
     }
     
     /*
+	Program Create
+	*/
+    if (document.getElementById('program_create_page') != null) {
+        $("#program_sub").click(function(){
+            if($(this).is(":checked")){
+                $('#additional').hide();
+            } else {
+                $('#additional').show();
+            }
+        });
+    }
+    
+    /*
 	Program Sub Lists
 	*/
     if (document.getElementById('program_sub_lists_page') != null) {
@@ -1143,6 +1156,34 @@ $(function () {
                 width: 60,
                 template: "#= data.Action #"
             }]
+        });
+        
+        $('body').delegate(".delete", "click", function() {
+            var id = $(this).attr("id");
+            var action = "program_sub_delete";
+            var grid = "multipleTable";
+            var dataString = 'id='+ id +'&action='+ action +'&grid='+ grid;
+            $.ajax(
+            {
+                type: "POST",
+                url: newPathname + action,
+                data: dataString,
+                cache: false,
+                beforeSend: function()
+                {
+                    $('.'+id+'-delete').html('<i class="fa fa-spinner fa-spin"></i>');
+                },
+                success: function(data)
+                {
+                    $('.'+id+'-delete').html('<i class="fa fa-times font16 text-danger"></i>');
+                    $('.modal-dialog').removeClass('modal-lg');
+                    $('.modal-dialog').addClass('modal-sm');
+                    $('.modal-title').text('Confirm Delete');
+                    $('.modal-body').html(data);
+                    $('#myModal').modal('show');
+                }
+            });
+            return false;
         });
     }
     
