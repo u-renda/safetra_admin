@@ -60,6 +60,7 @@ $route['admin_lists'] = 'admin/admin_lists';
 
 $route['article_create'] = 'article/article_create';
 $route['article_delete'] = 'article/article_delete';
+$route['article_edit'] = 'article/article_edit';
 $route['article_get'] = 'article/article_get';
 $route['article_lists'] = 'article/article_lists';
 
@@ -103,6 +104,7 @@ $route['profile'] = 'admin/profile';
 
 $route['program_create'] = 'program/program_create';
 $route['program_delete'] = 'program/program_delete';
+$route['program_edit'] = 'program/program_edit';
 $route['program_get'] = 'program/program_get';
 $route['program_lists'] = 'program/program_lists';
 

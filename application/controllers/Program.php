@@ -97,6 +97,72 @@ class Program extends CI_Controller {
             echo "Data Not Found";
         }
 	}
+	
+	function program_edit()
+	{
+		$data = array();
+		$data['id'] = $this->input->get('id');
+		
+		$query2 = $this->program_model->info(array('id_program' => $data['id']));
+		
+		if ($query2->code == 200)
+		{
+			if ($this->input->post('submit') == TRUE)
+			{
+				$query3 = $this->program_sub_model->lists(array('id_program' => $data['id']));
+				
+				$this->load->library('form_validation');
+				$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+				
+				if ($query3->total > 0)
+				{
+					$this->form_validation->set_rules('program_objective', 'Tujuan Program', 'required');
+					$this->form_validation->set_rules('training_purpose', 'Tujuan Pelatihan', 'required');
+					$this->form_validation->set_rules('requirements_of_participant', 'Persyaratan Peserta', 'required');
+					$this->form_validation->set_rules('training_material', 'Materi Pelatihan', 'required');
+				}
+				
+				$this->form_validation->set_rules('name', 'Name', 'required');
+				$this->form_validation->set_rules('percentage', 'Percentage', 'required');
+				
+				if ($this->form_validation->run() == FALSE)
+				{
+					validation_errors();
+				}
+				else
+				{
+					$param = array();
+					$param['id_program'] = $data['id'];
+					$param['name'] = $this->input->post('name');
+					$param['percentage'] = $this->input->post('percentage');
+					$param['program_objective'] = $this->input->post('program_objective');
+					$param['training_purpose'] = $this->input->post('training_purpose');
+					$param['requirements_of_participant'] = $this->input->post('requirements_of_participant');
+					$param['training_material'] = $this->input->post('training_material');
+					$param['others'] = $this->input->post('others');
+					$query = $this->program_model->update($param);
+					
+					if ($query->code == 200)
+					{
+						redirect($this->config->item('link_program_lists').'?msg=success&type=update');
+					}
+					else
+					{
+						redirect($this->config->item('link_program_lists').'?msg=error&type=update');
+					}
+				}
+			}
+			
+			$data['result'] = $query2->result;
+			$data['view_content'] = 'program/program_edit';
+			$this->load->view('templates/frame', $data);
+		}
+        else
+        {
+			$data['view_content'] = 'errors/data_not_found';
+			$this->load->view('templates/frame', $data);
+        }
+	}
 
     function program_get()
     {
