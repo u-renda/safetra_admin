@@ -23,7 +23,7 @@
                 <header class="panel-heading">
                     <h2 class="panel-title">Program Create</h2>
                 </header>
-                <form action="<?php echo $this->config->item('link_program_create'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                <form action="<?php echo $this->config->item('link_program_create'); ?>" method="post" class="form-horizontal form-bordered">
                     <div class="panel-body">
                         <div class="form-group">
                             <div class="col-sm-9 col-sm-offset-3">

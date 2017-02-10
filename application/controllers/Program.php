@@ -24,10 +24,14 @@ class Program extends CI_Controller {
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 			$this->form_validation->set_rules('name', 'Name', 'required');
 			$this->form_validation->set_rules('percentage', 'Percentage', 'required');
-			$this->form_validation->set_rules('program_objective', 'Tujuan Program', 'required');
-			$this->form_validation->set_rules('training_purpose', 'Tujuan Pelatihan', 'required');
-			$this->form_validation->set_rules('requirements_of_participant', 'Persyaratan Peserta', 'required');
-			$this->form_validation->set_rules('training_material', 'Materi Pelatihan', 'required');
+			
+			if ($this->input->post('program_sub') == FALSE)
+			{
+				$this->form_validation->set_rules('program_objective', 'Tujuan Program', 'required');
+				$this->form_validation->set_rules('training_purpose', 'Tujuan Pelatihan', 'required');
+				$this->form_validation->set_rules('requirements_of_participant', 'Persyaratan Peserta', 'required');
+				$this->form_validation->set_rules('training_material', 'Materi Pelatihan', 'required');
+			}
 			
 			if ($this->form_validation->run() == FALSE)
 			{
