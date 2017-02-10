@@ -251,11 +251,11 @@ class Program extends CI_Controller {
 				
 				if ($query->code == 200)
 				{
-					redirect($this->config->item('link_program_sub_lists').'?msg=success&type=create');
+					redirect($this->config->item('link_program_sub_lists').'?id='.$id_program.'&msg=success&type=create');
 				}
 				else
 				{
-					redirect($this->config->item('link_program_sub_lists').'?msg=error&type=create');
+					redirect($this->config->item('link_program_sub_lists').'?id='.$id_program.'&msg=error&type=create');
 				}
 			}
 		}
@@ -328,8 +328,7 @@ class Program extends CI_Controller {
         }
 
         $query = $this->program_sub_model->lists(array('id_program' => $id_program, 'limit' => $pageSize, 'offset' => $offset, 'order' => $order, 'sort' => $sort));
-        $total = $this->program_sub_model->lists_count(array('id_program' => $id_program));
-		$jsonData = array('total' => $total, 'results' => array());
+		$jsonData = array('total' => $query->total, 'results' => array());
 
         foreach ($query->result as $row)
         {
