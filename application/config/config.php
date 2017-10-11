@@ -554,6 +554,7 @@ $config['link_media_lists'] = $config['base_url'].'media_lists';
 $config['link_member_create'] = $config['base_url'].'member_create';
 $config['link_member_lists'] = $config['base_url'].'member_lists';
 $config['link_preferences_create'] = $config['base_url'].'preferences_create';
+$config['link_preferences_edit'] = $config['base_url'].'preferences_edit';
 $config['link_preferences_lists'] = $config['base_url'].'preferences_lists';
 $config['link_profile'] = $config['base_url'].'profile';
 $config['link_program_create'] = $config['base_url'].'program_create';

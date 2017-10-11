@@ -97,6 +97,7 @@ $route['member_lists'] = 'member/member_lists';
 
 $route['preferences_create'] = 'preferences/preferences_create';
 $route['preferences_delete'] = 'preferences/preferences_delete';
+$route['preferences_edit'] = 'preferences/preferences_edit';
 $route['preferences_get'] = 'preferences/preferences_get';
 $route['preferences_lists'] = 'preferences/preferences_lists';
 

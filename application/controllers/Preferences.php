@@ -88,6 +88,56 @@ class Preferences extends CI_Controller {
         }
 	}
 
+    function preferences_edit()
+    {
+        $data = array();
+		$data['id'] = $this->input->get_post('id');
+        $get = $this->preferences_model->info(array('id_preferences' => $data['id']));
+
+        if ($get->code == 200)
+        {
+            if ($this->input->post('submit') == TRUE)
+            {
+                $this->load->library('form_validation');
+				$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+				$this->form_validation->set_rules('name', 'Name', 'required');
+				$this->form_validation->set_rules('content', 'Content', 'required');
+
+                if ($this->form_validation->run() == FALSE)
+                {
+                    validation_errors();
+                }
+				else
+				{
+					$param = array();
+					$param['id_preferences'] = $data['id'];
+					$param['name'] = $this->input->post('name');
+					$param['content'] = $this->input->post('content');
+					//print_r($param);die();
+					$query = $this->preferences_model->update($param);
+					
+					if ($query->code == 200)
+					{
+						redirect($this->config->item('link_preferences_lists').'?msg=success&type=edit');
+					}
+					else
+					{
+						redirect($this->config->item('link_preferences_lists').'?msg=error&type=edit');
+					}
+				}
+            }
+
+            $data['result'] = $get->result;
+            $data['view_content'] = 'preferences/preferences_edit';
+        }
+        else
+        {
+            $data['view_content'] = 'errors/data_not_found';
+        }
+		
+		$this->load->view('templates/frame', $data);
+    }
+
     function preferences_get()
     {
         $page = $this->input->post('page') ? $this->input->post('page') : 1;

@@ -95,6 +95,7 @@
                     </div>
                     <footer class="panel-footer">
                         <input type="submit" class="btn btn-primary" name="submit" value="Create" id="submit_admin_create" />
+                        <input type="submit" class="btn btn-primary" name="submit" value="Create" id="submit_admin_create" />
                     </footer>
                 </form>
             </section>
