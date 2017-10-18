@@ -55,8 +55,10 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['admin_create'] = 'admin/admin_create';
 $route['admin_delete'] = 'admin/admin_delete';
+$route['admin_edit'] = 'admin/admin_edit';
 $route['admin_get'] = 'admin/admin_get';
 $route['admin_lists'] = 'admin/admin_lists';
+$route['admin_view'] = 'admin/admin_view';
 
 $route['article_create'] = 'article/article_create';
 $route['article_delete'] = 'article/article_delete';

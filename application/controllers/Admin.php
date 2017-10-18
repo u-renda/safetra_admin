@@ -100,6 +100,56 @@ class Admin extends CI_Controller {
         }
 	}
 
+    function admin_edit()
+    {
+        $id = $this->input->get_post('id');
+        $get = $this->admin_model->info(array('id_admin' => $id));
+
+        if ($get->code == 200)
+        {
+            if ($this->input->post('submit'))
+            {
+                $this->load->library('form_validation');
+                $this->form_validation->set_rules('name', 'name', 'required');
+                $this->form_validation->set_rules('email', 'email', 'required|valid_email|callback_check_admin_email');
+                $this->form_validation->set_rules('username', 'username', 'required');
+
+                if ($this->form_validation->run() == TRUE)
+                {
+                    $param = array();
+                    if ($this->input->post('password') != '')
+                    {
+                        $data['password'] = $this->input->post('password');
+                    }
+
+                    $param['id_admin'] = $id;
+                    $param['username'] = $this->input->post('username');
+                    $param['name'] = $this->input->post('name');
+                    $param['email'] = $this->input->post('email');
+                    $param['admin_role'] = 1;
+                    $query = $this->admin_model->update($param);
+
+                    if ($query->code == 200)
+                    {
+                        redirect($this->config->item('link_admin_lists'));
+                    }
+                    else
+                    {
+                        $data['error'] = $query->result;
+                    }
+                }
+            }
+
+            $data['admin'] = $get->result;
+            $data['view_content'] = 'admin/admin_edit';
+            $this->load->view('templates/frame', $data);
+        }
+        else
+        {
+            echo "Data not found";
+        }
+    }
+
     function admin_get()
     {
         $page = $this->input->post('page') ? $this->input->post('page') : 1;
@@ -151,6 +201,33 @@ class Admin extends CI_Controller {
 		$data['msg'] = $this->input->get('msg');
 		$data['view_content'] = 'admin/admin_lists';
 		$this->load->view('templates/frame', $data);
+	}
+	
+	function admin_view()
+	{
+		$id = $this->input->post('id');
+		$get = $this->admin_model->info(array('id_admin' => $id));
+		
+		if ($get->code == 200)
+		{
+			$result = $get->result;
+            $code_admin_status = $this->config->item('code_admin_status');
+            $code_admin_role = $this->config->item('code_admin_role');
+			
+            $data = array();
+            $data['username'] = $result->username;
+            $data['email'] = $result->email;
+            $data['name'] = $result->name;
+            $data['photo'] = $result->photo;
+            $data['status'] = $code_admin_status[$result->status];
+            $data['role'] = $code_admin_role[$result->role];
+            $data['job_title'] = $result->job_title;
+			$this->load->view('admin/admin_view', $data);
+		}
+		else
+		{
+			echo "Data Not Found";
+		}
 	}
 	
 	function check_email()

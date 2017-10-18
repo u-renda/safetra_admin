@@ -23,15 +23,10 @@ class Program extends CI_Controller {
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 			$this->form_validation->set_rules('name', 'Name', 'required');
-			$this->form_validation->set_rules('percentage', 'Percentage', 'required');
-			
-			if ($this->input->post('program_sub') == FALSE)
-			{
-				$this->form_validation->set_rules('program_objective', 'Tujuan Program', 'required');
-				$this->form_validation->set_rules('training_purpose', 'Tujuan Pelatihan', 'required');
-				$this->form_validation->set_rules('requirements_of_participant', 'Persyaratan Peserta', 'required');
-				$this->form_validation->set_rules('training_material', 'Materi Pelatihan', 'required');
-			}
+			$this->form_validation->set_rules('introduction', 'Pengertian Program', 'required');
+			$this->form_validation->set_rules('training_purpose', 'Tujuan Pelatihan', 'required');
+			$this->form_validation->set_rules('target_participant', 'Peserta', 'required');
+			$this->form_validation->set_rules('course_content', 'Materi Pelatihan', 'required');
 			
 			if ($this->form_validation->run() == FALSE)
 			{
@@ -41,11 +36,10 @@ class Program extends CI_Controller {
 			{
 				$param = array();
 				$param['name'] = $this->input->post('name');
-				$param['percentage'] = $this->input->post('percentage');
-				$param['program_objective'] = $this->input->post('program_objective');
+				$param['introduction'] = $this->input->post('introduction');
 				$param['training_purpose'] = $this->input->post('training_purpose');
-				$param['requirements_of_participant'] = $this->input->post('requirements_of_participant');
-				$param['training_material'] = $this->input->post('training_material');
+				$param['target_participant'] = $this->input->post('target_participant');
+				$param['course_content'] = $this->input->post('course_content');
 				$param['others'] = $this->input->post('others');
 				$query = $this->program_model->create($param);
 				
@@ -113,21 +107,14 @@ class Program extends CI_Controller {
 		{
 			if ($this->input->post('submit') == TRUE)
 			{
-				$query3 = $this->program_sub_model->lists(array('id_program' => $data['id']));
 				
 				$this->load->library('form_validation');
 				$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-				
-				if ($query3->total > 0)
-				{
-					$this->form_validation->set_rules('program_objective', 'Tujuan Program', 'required');
-					$this->form_validation->set_rules('training_purpose', 'Tujuan Pelatihan', 'required');
-					$this->form_validation->set_rules('requirements_of_participant', 'Persyaratan Peserta', 'required');
-					$this->form_validation->set_rules('training_material', 'Materi Pelatihan', 'required');
-				}
-				
+				$this->form_validation->set_rules('introduction', 'Tujuan Program', 'required');
+				$this->form_validation->set_rules('training_purpose', 'Tujuan Pelatihan', 'required');
+				$this->form_validation->set_rules('target_participant', 'Persyaratan Peserta', 'required');
+				$this->form_validation->set_rules('course_content', 'Materi Pelatihan', 'required');
 				$this->form_validation->set_rules('name', 'Name', 'required');
-				$this->form_validation->set_rules('percentage', 'Percentage', 'required');
 				
 				if ($this->form_validation->run() == FALSE)
 				{
@@ -138,11 +125,10 @@ class Program extends CI_Controller {
 					$param = array();
 					$param['id_program'] = $data['id'];
 					$param['name'] = $this->input->post('name');
-					$param['percentage'] = $this->input->post('percentage');
-					$param['program_objective'] = $this->input->post('program_objective');
+					$param['introduction'] = $this->input->post('introduction');
 					$param['training_purpose'] = $this->input->post('training_purpose');
-					$param['requirements_of_participant'] = $this->input->post('requirements_of_participant');
-					$param['training_material'] = $this->input->post('training_material');
+					$param['target_participant'] = $this->input->post('target_participant');
+					$param['course_content'] = $this->input->post('course_content');
 					$param['others'] = $this->input->post('others');
 					$query = $this->program_model->update($param);
 					
@@ -198,7 +184,7 @@ class Program extends CI_Controller {
 			$entry = array(
                 'No' => $i,
                 'Name' => ucwords($row->name),
-                'Percentage' => $row->percentage,
+                'Introduction' => $row->introduction,
                 'Action' => $action
             );
 

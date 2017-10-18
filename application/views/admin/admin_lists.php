@@ -24,6 +24,7 @@
                     <h2 class="panel-title">Admin Lists</h2>
                 </header>
                 <div class="panel-body">
+                    <a type="button" class="btn btn-success mb-xl" href="<?php echo $this->config->item('link_admin_create'); ?>">Create New</a>
                     <?php
                     if ($msg == TRUE)
                     {

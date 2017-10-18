@@ -535,6 +535,7 @@ $config['safetra_key'] = 'bd6fb882067e6ok56GR93376cd411ee';
 
 // LINK
 $config['link_admin_create'] = $config['base_url'].'admin_create';
+$config['link_admin_edit'] = $config['base_url'].'admin_edit';
 $config['link_admin_lists'] = $config['base_url'].'admin_lists';
 $config['link_article_create'] = $config['base_url'].'article_create';
 $config['link_article_edit'] = $config['base_url'].'article_edit';
@@ -570,4 +571,8 @@ $config['link_testimony_lists'] = $config['base_url'].'testimony_lists';
 $config['code_admin_role'] = array(
     1 => 'Admin',
     2 => 'Team'
+);
+
+$config['code_admin_status'] = array(
+    1 => 'Active'
 );

@@ -125,7 +125,7 @@ $(function () {
                 },
                 success: function(data)
                 {
-                    $('.'+id+'-view').html('<span class="glyphicon glyphicon-folder-open fontblue font16" aria-hidden="true"></span>');
+                    $('.'+id+'-view').html('<span class="fa fa-file-text font16" aria-hidden="true"></span>');
                     $('.modal-dialog').removeClass('modal-sm');
                     $('.modal-dialog').addClass('modal-lg');
                     $('.modal-title').text('Member View');
@@ -994,13 +994,13 @@ $(function () {
             {
                 field: "Name",
                 filterable: false,
-                width: 300
+                width: 150
             },
             {
-                field: "Percentage",
+                field: "Introduction",
                 filterable: false,
                 sortable: false,
-                width: 80
+                width: 300
             },
             {
                 field: "Action",
@@ -1073,19 +1073,6 @@ $(function () {
     }
     
     /*
-	Program Create
-	*/
-    if (document.getElementById('program_create_page') != null) {
-        $("#program_sub").click(function(){
-            if($(this).is(":checked")){
-                $('#additional').hide();
-            } else {
-                $('#additional').show();
-            }
-        });
-    }
-    
-    /*
 	Program Sub Lists
 	*/
     if (document.getElementById('program_sub_lists_page') != null) {
@@ -1140,14 +1127,14 @@ $(function () {
             {
                 field: "Name",
                 filterable: false,
-                width: 100
+                width: 300
             },
             {
                 field: "ProgramObjective",
                 title: "Program Objective",
                 filterable: false,
                 sortable: false,
-                width: 400
+                width: 300
             },
             {
                 field: "Action",

@@ -41,6 +41,7 @@
                         }
                     }
                     ?>
+                    <a href="<?php echo $this->config->item('link_program_create'); ?>" type="button" class="btn btn-primary mb-xl">Tambah</a>
                     <div id="multipleTable"></div>
                 </div>
             </section>
