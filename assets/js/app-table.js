@@ -1130,8 +1130,7 @@ $(function () {
                 width: 300
             },
             {
-                field: "ProgramObjective",
-                title: "Program Objective",
+                field: "Introduction",
                 filterable: false,
                 sortable: false,
                 width: 300

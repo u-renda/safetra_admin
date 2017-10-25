@@ -24,9 +24,6 @@ class Program extends CI_Controller {
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 			$this->form_validation->set_rules('name', 'Name', 'required');
 			$this->form_validation->set_rules('introduction', 'Pengertian Program', 'required');
-			$this->form_validation->set_rules('training_purpose', 'Tujuan Pelatihan', 'required');
-			$this->form_validation->set_rules('target_participant', 'Peserta', 'required');
-			$this->form_validation->set_rules('course_content', 'Materi Pelatihan', 'required');
 			
 			if ($this->form_validation->run() == FALSE)
 			{
@@ -111,9 +108,6 @@ class Program extends CI_Controller {
 				$this->load->library('form_validation');
 				$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 				$this->form_validation->set_rules('introduction', 'Tujuan Program', 'required');
-				$this->form_validation->set_rules('training_purpose', 'Tujuan Pelatihan', 'required');
-				$this->form_validation->set_rules('target_participant', 'Persyaratan Peserta', 'required');
-				$this->form_validation->set_rules('course_content', 'Materi Pelatihan', 'required');
 				$this->form_validation->set_rules('name', 'Name', 'required');
 				
 				if ($this->form_validation->run() == FALSE)
@@ -214,10 +208,10 @@ class Program extends CI_Controller {
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 			$this->form_validation->set_rules('name', 'Name', 'required');
-			$this->form_validation->set_rules('program_objective', 'Tujuan Program', 'required');
+			$this->form_validation->set_rules('introduction', 'Pengertian Program', 'required');
 			$this->form_validation->set_rules('training_purpose', 'Tujuan Pelatihan', 'required');
-			$this->form_validation->set_rules('requirements_of_participant', 'Persyaratan Peserta', 'required');
-			$this->form_validation->set_rules('training_material', 'Materi Pelatihan', 'required');
+			$this->form_validation->set_rules('target_participant', 'Persyaratan Peserta', 'required');
+			$this->form_validation->set_rules('course_content', 'Materi Pelatihan', 'required');
 			
 			if ($this->form_validation->run() == FALSE)
 			{
@@ -228,10 +222,10 @@ class Program extends CI_Controller {
 				$param = array();
 				$param['id_program'] = $id_program;
 				$param['name'] = $this->input->post('name');
-				$param['program_objective'] = $this->input->post('program_objective');
+				$param['introduction'] = $this->input->post('introduction');
 				$param['training_purpose'] = $this->input->post('training_purpose');
-				$param['requirements_of_participant'] = $this->input->post('requirements_of_participant');
-				$param['training_material'] = $this->input->post('training_material');
+				$param['target_participant'] = $this->input->post('target_participant');
+				$param['course_content'] = $this->input->post('course_content');
 				$param['others'] = $this->input->post('others');
 				$query = $this->program_sub_model->create($param);
 				
@@ -294,6 +288,64 @@ class Program extends CI_Controller {
             echo "Data Not Found";
         }
 	}
+	
+	function program_sub_edit()
+	{
+		$data = array();
+		$data['id'] = $this->input->get('id');
+		
+		$query2 = $this->program_sub_model->info(array('id_program_sub' => $data['id']));
+		
+		if ($query2->code == 200)
+		{
+			if ($this->input->post('submit') == TRUE)
+			{
+				
+				$this->load->library('form_validation');
+				$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+				$this->form_validation->set_rules('introduction', 'Pengertian Program', 'required');
+				$this->form_validation->set_rules('name', 'Name', 'required');
+				$this->form_validation->set_rules('training_purpose', 'Tujuan Pelatihan', 'required');
+				$this->form_validation->set_rules('target_participant', 'Persyaratan Peserta', 'required');
+				$this->form_validation->set_rules('course_content', 'Materi Pelatihan', 'required');
+				
+				if ($this->form_validation->run() == FALSE)
+				{
+					validation_errors();
+				}
+				else
+				{
+					$param = array();
+					$param['id_program_sub'] = $data['id'];
+					$param['name'] = $this->input->post('name');
+					$param['introduction'] = $this->input->post('introduction');
+					$param['training_purpose'] = $this->input->post('training_purpose');
+					$param['target_participant'] = $this->input->post('target_participant');
+					$param['course_content'] = $this->input->post('course_content');
+					$param['others'] = $this->input->post('others');
+					$query = $this->program_sub_model->update($param);
+					
+					if ($query->code == 200)
+					{
+						redirect($this->config->item('link_program_sub_lists').'?id='.$query2->result->program->id_program.'&msg=success&type=update');
+					}
+					else
+					{
+						redirect($this->config->item('link_program_sub_lists').'?id='.$query2->result->program->id_program.'&msg=error&type=update');
+					}
+				}
+			}
+			
+			$data['result'] = $query2->result;
+			$data['view_content'] = 'program/program_sub_edit';
+			$this->load->view('templates/frame', $data);
+		}
+        else
+        {
+			$data['view_content'] = 'errors/data_not_found';
+			$this->load->view('templates/frame', $data);
+        }
+	}
 
     function program_sub_get()
     {
@@ -318,13 +370,13 @@ class Program extends CI_Controller {
 
         foreach ($query->result as $row)
         {
-            $action = '<a title="Edit" href="program_edit?id='.$row->id_program.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
-                        <a title="Delete" id="'.$row->id_program.'" class="delete '.$row->id_program.'-delete" href="#"><i class="fa fa-times font16 text-danger"></i></a>';
+            $action = '<a title="Edit" href="program_sub_edit?id='.$row->id_program_sub.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
+                        <a title="Delete" id="'.$row->id_program_sub.'" class="delete '.$row->id_program_sub.'-delete" href="#"><i class="fa fa-times font16 text-danger"></i></a>';
 			
 			$entry = array(
                 'No' => $i,
                 'Name' => ucwords($row->name),
-                'ProgramObjective' => $row->program_objective,
+                'Introduction' => $row->introduction,
                 'Action' => $action
             );
 

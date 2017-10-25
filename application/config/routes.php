@@ -112,6 +112,7 @@ $route['program_get'] = 'program/program_get';
 $route['program_lists'] = 'program/program_lists';
 
 $route['program_sub_create'] = 'program/program_sub_create';
+$route['program_sub_edit'] = 'program/program_sub_edit';
 $route['program_sub_delete'] = 'program/program_sub_delete';
 $route['program_sub_get'] = 'program/program_sub_get';
 $route['program_sub_lists'] = 'program/program_sub_lists';

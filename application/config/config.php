@@ -562,6 +562,7 @@ $config['link_program_create'] = $config['base_url'].'program_create';
 $config['link_program_edit'] = $config['base_url'].'program_edit';
 $config['link_program_lists'] = $config['base_url'].'program_lists';
 $config['link_program_sub_create'] = $config['base_url'].'program_sub_create';
+$config['link_program_sub_edit'] = $config['base_url'].'program_sub_edit';
 $config['link_program_sub_lists'] = $config['base_url'].'program_sub_lists';
 $config['link_slider_create'] = $config['base_url'].'slider_create';
 $config['link_slider_lists'] = $config['base_url'].'slider_lists';

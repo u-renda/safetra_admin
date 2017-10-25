@@ -26,17 +26,17 @@
                 <form action="<?php echo $this->config->item('link_program_sub_create').'?id='.$program->id_program; ?>" method="post" class="form-horizontal form-bordered">
                     <div class="panel-body">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"><span class="text-danger">*</span> Name:</label>
+                            <label class="col-sm-3 control-label"><span class="text-danger">*</span> Nama Program:</label>
                             <div class="col-sm-9">
                                 <input type="text" name="name" class="form-control" value="<?php echo set_value('name'); ?>">
                                 <?php echo form_error('name'); ?>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"><span class="text-danger">*</span> Tujuan Program:</label>
+                            <label class="col-sm-3 control-label"><span class="text-danger">*</span> Pengertian Program:</label>
                             <div class="col-sm-9">
-                                <textarea rows="5" name="program_objective" class="form-control mceEditor"><?php echo set_value('program_objective'); ?></textarea>
-                                <?php echo form_error('program_objective'); ?>
+                                <textarea rows="5" name="introduction" class="form-control mceEditor"><?php echo set_value('introduction'); ?></textarea>
+                                <?php echo form_error('introduction'); ?>
                             </div>
                         </div>
                         <div class="form-group">
@@ -49,15 +49,15 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><span class="text-danger">*</span> Persyaratan Peserta:</label>
                             <div class="col-sm-9">
-                                <textarea rows="5" name="requirements_of_participant" class="form-control mceEditor"><?php echo set_value('requirements_of_participant'); ?></textarea>
-                                <?php echo form_error('requirements_of_participant'); ?>
+                                <textarea rows="5" name="target_participant" class="form-control mceEditor"><?php echo set_value('target_participant'); ?></textarea>
+                                <?php echo form_error('target_participant'); ?>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><span class="text-danger">*</span> Materi Pelatihan:</label>
                             <div class="col-sm-9">
-                                <textarea rows="5" name="training_material" class="form-control mceEditor"><?php echo set_value('training_material'); ?></textarea>
-                                <?php echo form_error('training_material'); ?>
+                                <textarea rows="5" name="course_content" class="form-control mceEditor"><?php echo set_value('course_content'); ?></textarea>
+                                <?php echo form_error('course_content'); ?>
                             </div>
                         </div>
                         <div class="form-group">
@@ -69,6 +69,7 @@
                     </div>
                     <footer class="panel-footer">
                         <input type="submit" class="btn btn-primary" name="submit" value="Create" id="submit_program_sub_create" />
+                        <a type="button" class="btn btn-default" href="<?php echo $this->config->item('link_program_sub_lists').'?id='.$program->id_program; ?>">Batal</a>
                     </footer>
                 </form>
             </section>
