@@ -4,7 +4,7 @@
 
 		<!-- Basic -->
 		<meta charset="UTF-8">
-
+		<title>Safetra Indonesia</title>
 		<meta name="keywords" content="K3, Keselamatan dan Kesehatan Kerja" />
 		<meta name="description" content="Safetra - Training Keselamatan dan Kesehatan Kerja">
 		<meta name="author" content="safetra.co.id">
