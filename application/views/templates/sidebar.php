@@ -20,37 +20,19 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-parent list-parent" id="admin">
+                    <li class="nav-parent list-parent" id="program">
                         <a>
-                            <i class="fa fa-user-secret" aria-hidden="true"></i>
-                            <span>Admin</span>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <span>Program</span>
                         </a>
                         <ul class="nav nav-children">
                             <li class="list-child">
-                                <a href="<?php echo $this->config->item('link_admin_lists'); ?>">
+                                <a href="<?php echo $this->config->item('link_program_lists'); ?>">
                                      Lists
                                 </a>
                             </li>
                             <li class="list-child">
-                                <a href="<?php echo $this->config->item('link_admin_create'); ?>">
-                                     Create
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-parent list-parent" id="article">
-                        <a>
-                            <i class="fa fa-files-o" aria-hidden="true"></i>
-                            <span>Article</span>
-                        </a>
-                        <ul class="nav nav-children">
-                            <li class="list-child">
-                                <a href="<?php echo $this->config->item('link_article_lists'); ?>">
-                                     Lists
-                                </a>
-                            </li>
-                            <li class="list-child">
-                                <a href="<?php echo $this->config->item('link_article_create'); ?>">
+                                <a href="<?php echo $this->config->item('link_program_create'); ?>">
                                      Create
                                 </a>
                             </li>
@@ -74,6 +56,60 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-parent list-parent" id="slider">
+                        <a>
+                            <i class="fa fa-sliders" aria-hidden="true"></i>
+                            <span>Slider</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li class="list-child">
+                                <a href="<?php echo $this->config->item('link_slider_lists'); ?>">
+                                     Lists
+                                </a>
+                            </li>
+                            <li class="list-child">
+                                <a href="<?php echo $this->config->item('link_slider_create'); ?>">
+                                     Create
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-parent list-parent" id="testimony">
+                        <a>
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            <span>Testimony</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li class="list-child">
+                                <a href="<?php echo $this->config->item('link_testimony_lists'); ?>">
+                                     Lists
+                                </a>
+                            </li>
+                            <li class="list-child">
+                                <a href="<?php echo $this->config->item('link_testimony_create'); ?>">
+                                     Create
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-parent list-parent" id="article">
+                        <a>
+                            <i class="fa fa-files-o" aria-hidden="true"></i>
+                            <span>Article</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li class="list-child">
+                                <a href="<?php echo $this->config->item('link_article_lists'); ?>">
+                                     Lists
+                                </a>
+                            </li>
+                            <li class="list-child">
+                                <a href="<?php echo $this->config->item('link_article_create'); ?>">
+                                     Create
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-parent list-parent" id="company">
                         <a>
                             <i class="fa fa-slack" aria-hidden="true"></i>
@@ -92,24 +128,6 @@
                             </li>
                         </ul>
                     </li>
-                    <!--<li class="nav-parent list-parent">
-                        <a>
-                            <i class="fa fa-file-image-o" aria-hidden="true"></i>
-                            <span>Media</span>
-                        </a>
-                        <ul class="nav nav-children">
-                            <li class="list-child">
-                                <a href="<?php //echo $this->config->item('link_media_album_lists'); ?>">
-                                     Lists
-                                </a>
-                            </li>
-                            <li class="list-child">
-                                <a href="<?php //echo $this->config->item('link_media_album_create'); ?>">
-                                     Create
-                                </a>
-                            </li>
-                        </ul>
-                    </li>-->
                     <li class="nav-parent list-parent" id="member">
                         <a>
                             <i class="fa fa-users" aria-hidden="true"></i>
@@ -123,24 +141,6 @@
                             </li>
                             <li class="list-child">
                                 <a href="<?php echo $this->config->item('link_member_create'); ?>">
-                                     Create
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-parent list-parent" id="slider">
-                        <a>
-                            <i class="fa fa-sliders" aria-hidden="true"></i>
-                            <span>Slider</span>
-                        </a>
-                        <ul class="nav nav-children">
-                            <li class="list-child">
-                                <a href="<?php echo $this->config->item('link_slider_lists'); ?>">
-                                     Lists
-                                </a>
-                            </li>
-                            <li class="list-child">
-                                <a href="<?php echo $this->config->item('link_slider_create'); ?>">
                                      Create
                                 </a>
                             </li>
@@ -164,37 +164,19 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-parent list-parent" id="program">
+                    <li class="nav-parent list-parent" id="admin">
                         <a>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <span>Program</span>
+                            <i class="fa fa-user-secret" aria-hidden="true"></i>
+                            <span>Admin</span>
                         </a>
                         <ul class="nav nav-children">
                             <li class="list-child">
-                                <a href="<?php echo $this->config->item('link_program_lists'); ?>">
+                                <a href="<?php echo $this->config->item('link_admin_lists'); ?>">
                                      Lists
                                 </a>
                             </li>
                             <li class="list-child">
-                                <a href="<?php echo $this->config->item('link_program_create'); ?>">
-                                     Create
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-parent list-parent" id="testimony">
-                        <a>
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            <span>Testimony</span>
-                        </a>
-                        <ul class="nav nav-children">
-                            <li class="list-child">
-                                <a href="<?php echo $this->config->item('link_testimony_lists'); ?>">
-                                     Lists
-                                </a>
-                            </li>
-                            <li class="list-child">
-                                <a href="<?php echo $this->config->item('link_testimony_create'); ?>">
+                                <a href="<?php echo $this->config->item('link_admin_create'); ?>">
                                      Create
                                 </a>
                             </li>

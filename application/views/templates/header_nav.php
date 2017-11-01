@@ -19,9 +19,10 @@
                     <a href="#" data-toggle="dropdown">
                         <figure class="profile-picture">
                             <?php
-                            echo '<img src="'.base_url('assets/images').'/default_user.png" alt="'.$this->session->userdata('name').'" class="img-circle" data-lock-picture="'.base_url('assets/images').'/default_user.png" />';
                             if ($this->session->userdata('photo') != '') {
                                 echo '<img src="'.$this->session->userdata('photo').'" alt="'.$this->session->userdata('name').'" class="img-circle" data-lock-picture="'.$this->session->userdata('photo').'" />';
+                            } else {
+                                echo '<img src="'.base_url('assets/images').'/default_user.png" alt="'.$this->session->userdata('name').'" class="img-circle" data-lock-picture="'.base_url('assets/images').'/default_user.png" />';
                             } ?>
                         </figure>
                         <div class="profile-info" data-lock-name="<?php echo $this->session->userdata('name'); ?>" data-lock-email="<?php echo $this->session->userdata('email'); ?>">
