@@ -21,7 +21,7 @@
         <div class="col-md-12">
             <section class="panel panel-featured">
                 <header class="panel-heading">
-                    <h2 class="panel-title">Program Edit</h2>
+                    <h2 class="panel-title">Ubah Data</h2>
                 </header>
                 <form action="<?php echo $this->config->item('link_program_edit').'?id='.$id; ?>" method="post" class="form-horizontal form-bordered">
                     <div class="panel-body">
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <footer class="panel-footer">
-                        <input type="submit" class="btn btn-primary" name="submit" value="Save Changes" id="submit_program_edit" />
+                        <input type="submit" class="btn btn-primary" name="submit" value="Ubah" id="submit_program_edit" />
                         <a type="button" class="btn btn-default" href="<?php echo $this->config->item('link_program_lists'); ?>">Batal</a>
                     </footer>
                 </form>

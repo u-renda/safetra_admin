@@ -25,13 +25,8 @@ class Client extends CI_Controller {
 			$this->form_validation->set_rules('name', 'nama', 'required');
 			$this->form_validation->set_rules('logo', 'logo', 'callback_check_media');
 			
-			if ($this->form_validation->run() == FALSE)
+			if ($this->form_validation->run() == TRUE)
 			{
-				validation_errors();
-			}
-			else
-			{
-				print
 				$param = array();
 				$param['name'] = $this->input->post('name');
 				$param['client_url'] = $this->input->post('client_url');
@@ -90,6 +85,57 @@ class Client extends CI_Controller {
             echo "Data Not Found";
         }
 	}
+
+    function client_edit()
+    {
+        $data = array();
+		$data['id'] = $this->input->get_post('id');
+        $get = $this->client_model->info(array('id_client' => $data['id']));
+
+        if ($get->code == 200)
+        {
+            if ($this->input->post('submit') == TRUE)
+            {
+                $this->load->library('form_validation');
+				$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+				$this->form_validation->set_message('required', '%s harus diisi');
+				$this->form_validation->set_rules('name', 'nama', 'required');
+				$this->form_validation->set_rules('logo', 'logo', 'callback_check_media');
+
+                if ($this->form_validation->run() == TRUE)
+                {
+					$param = array();
+					if ($this->processMedia != '')
+					{
+						$param['logo'] = $this->processMedia;
+					}
+					
+					$param['id_client'] = $data['id'];
+					$param['name'] = $this->input->post('name');
+					$param['client_url'] = $this->input->post('client_url');
+					$query = $this->client_model->update($param);
+					
+					if ($query->code == 200)
+					{
+						redirect($this->config->item('link_client_lists').'?msg=success&type=edit');
+					}
+					else
+					{
+						redirect($this->config->item('link_client_lists').'?msg=error&type=edit');
+					}
+				}
+            }
+
+            $data['result'] = $get->result;
+            $data['view_content'] = 'client/client_edit';
+        }
+        else
+        {
+            $data['view_content'] = 'errors/data_not_found';
+        }
+		
+		$this->load->view('templates/frame', $data);
+    }
 
     function client_get()
     {

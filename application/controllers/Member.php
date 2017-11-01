@@ -14,6 +14,23 @@ class Member extends CI_Controller {
 		if ($this->session->userdata('is_login') == FALSE) { redirect($this->config->item('link_login')); }
     }
 	
+	function check_email()
+	{
+		$self = $this->input->post('selfemail');
+		$input = $this->input->post('email');
+		$get = $this->member_model->info(array('email' => $input));
+		
+        if ($get->code == 200 && $self != $input)
+        {
+            $this->form_validation->set_message('check_email', 'Email sudah terdaftar');
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
+	}
+	
 	function member_create()
 	{
 		$data = array();
@@ -28,18 +45,14 @@ class Member extends CI_Controller {
 			$this->form_validation->set_message('min_length', '%s minimal 5 karakter');
 			$this->form_validation->set_rules('id_company', 'perusahaan', 'required');
 			$this->form_validation->set_rules('name', 'nama', 'required');
-			$this->form_validation->set_rules('email', 'email', 'required|valid_email');
+			$this->form_validation->set_rules('email', 'email', 'required|valid_email|callback_check_email');
 			$this->form_validation->set_rules('password', 'password', 'min_length[5]');
 			$this->form_validation->set_rules('phone_number', 'telp', 'required|numeric');
 			
-			if ($this->form_validation->run() == FALSE)
-			{
-				validation_errors();
-			}
-			else
+			if ($this->form_validation->run() == TRUE)
 			{
 				$param = array();
-				$param['id_company'] = $this->input->post('id_company');
+				$param['id_company'] = $this->input->post('id_member');
 				$param['name'] = $this->input->post('name');
 				$param['email'] = $this->input->post('email');
 				$param['password'] = $this->input->post('password');
@@ -108,6 +121,75 @@ class Member extends CI_Controller {
             echo "Data Not Found";
         }
 	}
+
+    function member_edit()
+    {
+        $data = array();
+		$data['id'] = $this->input->get_post('id');
+        $get = $this->member_model->info(array('id_member' => $data['id']));
+
+        if ($get->code == 200)
+        {
+            if ($this->input->post('submit') == TRUE)
+            {
+				$this->load->library('form_validation');
+				$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+				$this->form_validation->set_message('required', '%s harus diisi');
+				$this->form_validation->set_message('valid_email', 'Format %s salah');
+				$this->form_validation->set_message('numeric', 'Hanya diisi dengan angka');
+				$this->form_validation->set_message('min_length', '%s minimal 5 karakter');
+				$this->form_validation->set_rules('id_company', 'perusahaan', 'required');
+				$this->form_validation->set_rules('name', 'nama', 'required');
+				$this->form_validation->set_rules('email', 'email', 'required|valid_email|callback_check_email');
+				$this->form_validation->set_rules('password', 'password', 'min_length[5]');
+				$this->form_validation->set_rules('phone_number', 'telp', 'required|numeric');
+
+                if ($this->form_validation->run() == TRUE)
+                {
+					$param = array();
+                    if ($this->input->post('password') != '')
+                    {
+                        $param['password'] = $this->input->post('password');
+                    }
+					
+					$param['id_member'] = $data['id'];
+					$param['id_company'] = $this->input->post('id_member');
+					$param['name'] = $this->input->post('name');
+					$param['email'] = $this->input->post('email');
+					$param['phone_number'] = $this->input->post('phone_number');
+					$query = $this->member_model->update($param);
+					
+					if ($query->code == 200)
+					{
+						redirect($this->config->item('link_member_lists').'?msg=success&type=edit');
+					}
+					else
+					{
+						redirect($this->config->item('link_member_lists').'?msg=error&type=edit');
+					}
+				}
+            }
+		
+			$query2 = $this->company_model->lists(array());
+			$company = array();
+			
+			if ($query2->code == 200)
+			{
+				$company = $query2->result;
+			}
+			
+			$data['company_lists'] = (object) $company;
+            $data['result'] = $get->result;
+            $data['view_content'] = 'member/member_edit';
+        }
+        else
+        {
+            $data['view_content'] = 'errors/data_not_found';
+        }
+		
+		$this->load->view('templates/frame', $data);
+    }
+	
     function member_get()
     {
         $page = $this->input->post('page') ? $this->input->post('page') : 1;

@@ -26,11 +26,7 @@ class Testimony extends CI_Controller {
 			$this->form_validation->set_rules('job_title', 'perusahaan & jabatan', 'required');
 			$this->form_validation->set_rules('testimony', 'testimoni', 'required');
 			
-			if ($this->form_validation->run() == FALSE)
-			{
-				validation_errors();
-			}
-			else
+			if ($this->form_validation->run() == TRUE)
 			{
 				$param = array();
 				$param['name'] = $this->input->post('name');
@@ -88,6 +84,54 @@ class Testimony extends CI_Controller {
         else
         {
             echo "Data Not Found";
+        }
+	}
+	
+	function testimony_edit()
+	{
+		$data = array();
+		$data['id'] = $this->input->get('id');
+		$query2 = $this->testimony_model->info(array('id_testimony' => $data['id']));
+		
+		if ($query2->code == 200)
+		{
+			if ($this->input->post('submit') == TRUE)
+			{
+				$this->load->library('form_validation');
+				$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+				$this->form_validation->set_message('required', '%s harus diisi');
+				$this->form_validation->set_rules('name', 'nama', 'required');
+				$this->form_validation->set_rules('job_title', 'perusahaan & jabatan', 'required');
+				$this->form_validation->set_rules('testimony', 'testimoni', 'required');
+				
+				if ($this->form_validation->run() == TRUE)
+				{
+					$param = array();
+					$param['id_testimony'] = $data['id'];
+					$param['name'] = $this->input->post('name');
+					$param['job_title'] = $this->input->post('job_title');
+					$param['testimony'] = $this->input->post('testimony');
+					$query = $this->testimony_model->update($param);
+					
+					if ($query->code == 200)
+					{
+						redirect($this->config->item('link_testimony_lists').'?msg=success&type=update');
+					}
+					else
+					{
+						redirect($this->config->item('link_testimony_lists').'?msg=error&type=update');
+					}
+				}
+			}
+			
+			$data['result'] = $query2->result;
+			$data['view_content'] = 'testimony/testimony_edit';
+			$this->load->view('templates/frame', $data);
+		}
+        else
+        {
+			$data['view_content'] = 'errors/data_not_found';
+			$this->load->view('templates/frame', $data);
         }
 	}
 

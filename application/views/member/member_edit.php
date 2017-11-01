@@ -21,18 +21,19 @@
         <div class="col-md-12">
             <section class="panel panel-featured">
                 <header class="panel-heading">
-                    <h2 class="panel-title">Tambah Baru</h2>
+                    <h2 class="panel-title">Ubah Data</h2>
                 </header>
-                <form action="<?php echo $this->config->item('link_member_create'); ?>" method="post" class="form-horizontal form-bordered">
+                <form action="<?php echo $this->config->item('link_member_edit').'?id='.$id; ?>" method="post" class="form-horizontal form-bordered">
+                    <input type="hidden" name="selfemail" value="<?php echo $result->email; ?>">
                     <div class="panel-body">
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><span class="text-danger">*</span> Perusahaan:</label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="id_company">
                                     <option value="">-- Pilih Salah Satu --</option>
-                                    <?php foreach ($company_lists as $row) {
-                                        echo '<option value="'.$row->id_company.'"'.set_select('id_company', $row->id_company).'>'.$row->name.'</option>';
-                                    } ?>
+                                    <?php foreach ($company_lists as $row) { ?>
+                                        <option value="<?php echo $row->id_company; ?>" <?php if ($result->company->id_company == $row->id_company) { echo 'selected="selected"'; } echo set_select('id_company', $row->id_company); ?>><?php echo $row->name; ?></option>
+                                    <?php } ?>
                                 </select>
                                 <?php echo form_error('id_company'); ?>
                             </div>
@@ -40,21 +41,21 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><span class="text-danger">*</span> Nama:</label>
                             <div class="col-sm-9">
-                                <input type="text" name="name" class="form-control" value="<?php echo set_value('name'); ?>">
+                                <input type="text" name="name" class="form-control" value="<?php echo set_value('name', $result->name); ?>">
                                 <?php echo form_error('name'); ?>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><span class="text-danger">*</span> Email:</label>
                             <div class="col-sm-9">
-                                <input type="text" name="email" class="form-control" value="<?php echo set_value('email'); ?>">
+                                <input type="text" name="email" class="form-control" value="<?php echo set_value('email', $result->email); ?>">
                                 <?php echo form_error('email'); ?>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><span class="text-danger">*</span> Telp:</label>
                             <div class="col-sm-9">
-                                <input type="text" name="phone_number" class="form-control" value="<?php echo set_value('phone_number'); ?>">
+                                <input type="text" name="phone_number" class="form-control" value="<?php echo set_value('phone_number', $result->phone_number); ?>">
                                 <?php echo form_error('phone_number'); ?>
                             </div>
                         </div>
@@ -67,7 +68,7 @@
                         </div>
                     </div>
                     <footer class="panel-footer">
-                        <input type="submit" class="btn btn-primary" name="submit" value="Tambah" id="submit_member_create" />
+                        <input type="submit" class="btn btn-primary" name="submit" value="Ubah" id="submit_member" />
                         <a type="button" class="btn btn-default" href="<?php echo $this->config->item('link_member_lists'); ?>">Batal</a>
                     </footer>
                 </form>

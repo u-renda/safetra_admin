@@ -25,11 +25,7 @@ class Preferences extends CI_Controller {
 			$this->form_validation->set_rules('name', 'nama', 'required');
 			$this->form_validation->set_rules('content', 'isi', 'required');
 			
-			if ($this->form_validation->run() == FALSE)
-			{
-				validation_errors();
-			}
-			else
+			if ($this->form_validation->run() == TRUE)
 			{
 				$param = array();
 				$param['name'] = $this->input->post('name');
@@ -99,22 +95,18 @@ class Preferences extends CI_Controller {
         {
             if ($this->input->post('submit') == TRUE)
             {
-                $this->load->library('form_validation');
+				$this->load->library('form_validation');
 				$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-				$this->form_validation->set_rules('name', 'Name', 'required');
-				$this->form_validation->set_rules('content', 'Content', 'required');
+				$this->form_validation->set_message('required', '%s harus diisi');
+				$this->form_validation->set_rules('name', 'nama', 'required');
+				$this->form_validation->set_rules('content', 'isi', 'required');
 
-                if ($this->form_validation->run() == FALSE)
+                if ($this->form_validation->run() == TRUE)
                 {
-                    validation_errors();
-                }
-				else
-				{
 					$param = array();
 					$param['id_preferences'] = $data['id'];
 					$param['name'] = $this->input->post('name');
 					$param['content'] = $this->input->post('content');
-					
 					$query = $this->preferences_model->update($param);
 					
 					if ($query->code == 200)

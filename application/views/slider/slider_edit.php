@@ -17,13 +17,13 @@
     </header>
 
     <!-- start: page -->
-    <div class="row" id="slider_create_page">
+    <div class="row" id="slider_edit_page">
         <div class="col-md-12">
             <section class="panel panel-featured">
                 <header class="panel-heading">
-                    <h2 class="panel-title">Tambah Baru</h2>
+                    <h2 class="panel-title">Ubah Data</h2>
                 </header>
-                <form action="<?php echo $this->config->item('link_slider_create'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                <form action="<?php echo $this->config->item('link_slider_edit').'?id='.$id; ?>" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
                     <div class="panel-body">
                         
                         <div class="form-group">
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <footer class="panel-footer">
-                        <input type="submit" class="btn btn-primary" name="submit" value="Tambah" id="submit_slider_create" />
+                        <input type="submit" class="btn btn-primary" name="submit" value="Ubah" id="submit_slider_edit" />
                         <a type="button" class="btn btn-default" href="<?php echo $this->config->item('link_slider_lists'); ?>">Batal</a>
                     </footer>
                 </form>

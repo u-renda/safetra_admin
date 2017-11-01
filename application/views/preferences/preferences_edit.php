@@ -21,7 +21,7 @@
         <div class="col-md-12">
             <section class="panel panel-featured">
                 <header class="panel-heading">
-                    <h2 class="panel-title">Preferences Edit</h2>
+                    <h2 class="panel-title">Ubah Data</h2>
                 </header>
                 <form action="<?php echo $this->config->item('link_preferences_edit').'?id='.$id; ?>" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
                     <div class="panel-body">
@@ -41,7 +41,8 @@
                         </div>
                     </div>
                     <footer class="panel-footer">
-                        <input type="submit" class="btn btn-primary" name="submit" value="Update" id="submit_preferences_update" />
+                        <input type="submit" class="btn btn-primary" name="submit" value="Ubah" id="submit_preferences_edit" />
+                        <a type="button" class="btn btn-default" href="<?php echo $this->config->item('link_preferences_lists'); ?>">Batal</a>
                     </footer>
                 </form>
             </section>

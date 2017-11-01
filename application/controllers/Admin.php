@@ -32,11 +32,7 @@ class Admin extends CI_Controller {
 			$this->form_validation->set_rules('job_title', 'jabatan kerja', 'required');
 			$this->form_validation->set_rules('photo', 'foto', 'callback_check_media');
 			
-			if ($this->form_validation->run() == FALSE)
-			{
-				validation_errors();
-			}
-			else
+			if ($this->form_validation->run() == TRUE)
 			{
 				$param = array();
 				$param['name'] = $this->input->post('name');
@@ -105,52 +101,68 @@ class Admin extends CI_Controller {
 
     function admin_edit()
     {
-        $id = $this->input->get_post('id');
-        $get = $this->admin_model->info(array('id_admin' => $id));
+		$data = array();
+        $data['id'] = $this->input->get_post('id');
+        $get = $this->admin_model->info(array('id_admin' => $data['id']));
 
         if ($get->code == 200)
         {
-            if ($this->input->post('submit'))
+            if ($this->input->post('submit') == TRUE)
             {
                 $this->load->library('form_validation');
-                $this->form_validation->set_rules('name', 'name', 'required');
-                $this->form_validation->set_rules('email', 'email', 'required|valid_email|callback_check_admin_email');
-                $this->form_validation->set_rules('username', 'username', 'required');
+				$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+				$this->form_validation->set_message('required', '%s harus diisi');
+				$this->form_validation->set_message('min_length', '%s minimal 6 karakter');
+				$this->form_validation->set_message('valid_email', 'Format %s salah');
+				$this->form_validation->set_rules('name', 'nama', 'required');
+				$this->form_validation->set_rules('username', 'username', 'required|callback_check_username');
+				$this->form_validation->set_rules('email', 'email', 'required|valid_email|callback_check_email');
+				$this->form_validation->set_rules('role', 'peran di admin', 'required');
+				$this->form_validation->set_rules('job_title', 'jabatan kerja', 'required');
+				$this->form_validation->set_rules('photo', 'foto', 'callback_check_media');
 
                 if ($this->form_validation->run() == TRUE)
                 {
                     $param = array();
                     if ($this->input->post('password') != '')
                     {
-                        $data['password'] = $this->input->post('password');
+                        $param['password'] = $this->input->post('password');
                     }
+					
+					if ($this->processMedia != '')
+					{
+						$param['photo'] = $this->processMedia;
+					}
 
-                    $param['id_admin'] = $id;
-                    $param['username'] = $this->input->post('username');
+                    $param['id_admin'] = $data['id'];
                     $param['name'] = $this->input->post('name');
-                    $param['email'] = $this->input->post('email');
-                    $param['admin_role'] = 1;
+					$param['username'] = $this->input->post('username');
+					$param['email'] = $this->input->post('email');
+					$param['role'] = $this->input->post('role');
+					$param['job_title'] = $this->input->post('job_title');
                     $query = $this->admin_model->update($param);
 
                     if ($query->code == 200)
-                    {
-                        redirect($this->config->item('link_admin_lists'));
-                    }
-                    else
-                    {
-                        $data['error'] = $query->result;
-                    }
+					{
+						redirect($this->config->item('link_admin_lists').'?msg=success&type=edit');
+					}
+					else
+					{
+						redirect($this->config->item('link_admin_lists').'?msg=error&type=edit');
+					}
                 }
             }
 
-            $data['admin'] = $get->result;
+            $data['code_admin_role'] = $this->config->item('code_admin_role');
+            $data['result'] = $get->result;
             $data['view_content'] = 'admin/admin_edit';
-            $this->load->view('templates/frame', $data);
         }
         else
         {
-            echo "Data not found";
+            $data['view_content'] = 'errors/data_not_found';
         }
+		
+        $this->load->view('templates/frame', $data);
     }
 
     function admin_get()
@@ -235,17 +247,19 @@ class Admin extends CI_Controller {
 	
 	function check_email()
 	{
-		$query = $this->admin_model->info(array('email' => $this->input->post('email')));
+		$self = $this->input->post('selfemail');
+		$input = $this->input->post('email');
+		$get = $this->admin_model->info(array('email' => $input));
 		
-		if ($query->code == 200)
-		{
-			$this->form_validation->set_message('check_email', 'Email sudah terdaftar');
-			return FALSE;
-		}
-		else
-		{
-			return TRUE;
-		}
+        if ($get->code == 200 && $self != $input)
+        {
+            $this->form_validation->set_message('check_email', 'Email sudah terdaftar');
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
 	}
 	
 	function check_media()
@@ -275,16 +289,18 @@ class Admin extends CI_Controller {
 	
 	function check_username()
 	{
-		$query = $this->admin_model->info(array('username' => $this->input->post('username')));
+		$self = $this->input->post('selfusername');
+		$input = $this->input->post('username');
+		$get = $this->admin_model->info(array('username' => $input));
 		
-		if ($query->code == 200)
-		{
-			$this->form_validation->set_message('check_username', 'Username sudah terdaftar');
-			return FALSE;
-		}
-		else
-		{
-			return TRUE;
-		}
+        if ($get->code == 200 && $self != $input)
+        {
+            $this->form_validation->set_message('check_username', '%s sudah terdaftar');
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
 	}
 }

@@ -25,11 +25,7 @@ class Company extends CI_Controller {
 			$this->form_validation->set_rules('name', 'nama', 'required|callback_check_name');
 			$this->form_validation->set_rules('logo', 'Logo', 'callback_check_media');
 			
-			if ($this->form_validation->run() == FALSE)
-			{
-				validation_errors();
-			}
-			else
+			if ($this->form_validation->run() == TRUE)
 			{
 				$param = array();
 				$param['name'] = $this->input->post('name');
@@ -88,6 +84,56 @@ class Company extends CI_Controller {
             echo "Data Not Found";
         }
 	}
+
+    function company_edit()
+    {
+        $data = array();
+		$data['id'] = $this->input->get_post('id');
+        $get = $this->company_model->info(array('id_company' => $data['id']));
+
+        if ($get->code == 200)
+        {
+            if ($this->input->post('submit') == TRUE)
+            {
+				$this->load->library('form_validation');
+				$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+				$this->form_validation->set_message('required', '%s harus diisi');
+				$this->form_validation->set_rules('name', 'nama', 'required|callback_check_name');
+				$this->form_validation->set_rules('logo', 'Logo', 'callback_check_media');
+
+                if ($this->form_validation->run() == TRUE)
+                {
+					$param = array();
+					if ($this->processMedia != '')
+					{
+						$param['logo'] = $this->processMedia;
+					}
+					
+					$param['id_company'] = $data['id'];
+					$param['name'] = $this->input->post('name');
+					$query = $this->company_model->update($param);
+					
+					if ($query->code == 200)
+					{
+						redirect($this->config->item('link_company_lists').'?msg=success&type=edit');
+					}
+					else
+					{
+						redirect($this->config->item('link_company_lists').'?msg=error&type=edit');
+					}
+				}
+            }
+
+            $data['result'] = $get->result;
+            $data['view_content'] = 'company/company_edit';
+        }
+        else
+        {
+            $data['view_content'] = 'errors/data_not_found';
+        }
+		
+		$this->load->view('templates/frame', $data);
+    }
 
     function company_get()
     {

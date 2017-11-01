@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <footer class="panel-footer">
-                        <input type="submit" class="btn btn-primary" name="submit" value="Create" id="submit_company_create" />
+                        <input type="submit" class="btn btn-primary" name="submit" value="Tambah" id="submit_company_create" />
                         <a type="button" class="btn btn-default" href="<?php echo $this->config->item('link_company_lists'); ?>">Batal</a>
                     </footer>
                 </form>

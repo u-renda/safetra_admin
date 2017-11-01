@@ -30,6 +30,38 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
     if (winPath[3] === 'dashboard') {
         $('.list-dashboard').addClass('nav-active');
     }
+        
+    // untuk program sub & edit
+    if (winPath[2] === 'program_sub_lists' || winPath[2] === 'program_sub_create'
+         || winPath[2] === 'program_edit' || winPath[2] === 'program_sub_edit') {
+        $('#program').addClass('nav-active');
+    }
+    
+    // untuk edit
+    if (winPath[2] === 'admin_edit') {
+        $('#admin').addClass('nav-active');
+    }
+    if (winPath[2] === 'article_edit') {
+        $('#article').addClass('nav-active');
+    }
+    if (winPath[2] === 'client_edit') {
+        $('#client').addClass('nav-active');
+    }
+    if (winPath[2] === 'company_edit') {
+        $('#company').addClass('nav-active');
+    }
+    if (winPath[2] === 'member_edit') {
+        $('#member').addClass('nav-active');
+    }
+    if (winPath[2] === 'slider_edit') {
+        $('#slider').addClass('nav-active');
+    }
+    if (winPath[2] === 'preferences_edit') {
+        $('#preferences').addClass('nav-active');
+    }
+    if (winPath[2] === 'testimony_edit') {
+        $('#testimony').addClass('nav-active');
+    }
     
     list_child.each(function() {
         var href = $(this).find('a').attr('href');
@@ -40,11 +72,6 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
         if (href === newPath) {
             $(this).addClass('nav-active');
             list_parent.addClass('nav-active');
-        }
-        
-        // untuk program sub
-        if (winPath[2] === 'program_sub_lists' || winPath[2] === 'program_sub_create') {
-            $('#program').addClass('nav-active');
         }
     });
     

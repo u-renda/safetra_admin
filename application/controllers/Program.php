@@ -26,11 +26,7 @@ class Program extends CI_Controller {
 			$this->form_validation->set_rules('name', 'Name', 'required');
 			$this->form_validation->set_rules('introduction', 'pengertian program', 'required');
 			
-			if ($this->form_validation->run() == FALSE)
-			{
-				validation_errors();
-			}
-			else
+			if ($this->form_validation->run() == TRUE)
 			{
 				$param = array();
 				$param['name'] = $this->input->post('name');
@@ -98,24 +94,19 @@ class Program extends CI_Controller {
 	{
 		$data = array();
 		$data['id'] = $this->input->get('id');
-		
 		$query2 = $this->program_model->info(array('id_program' => $data['id']));
 		
 		if ($query2->code == 200)
 		{
 			if ($this->input->post('submit') == TRUE)
 			{
-				
 				$this->load->library('form_validation');
 				$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-				$this->form_validation->set_rules('introduction', 'Tujuan Program', 'required');
+				$this->form_validation->set_message('required', '%s harus diisi');
 				$this->form_validation->set_rules('name', 'Name', 'required');
+				$this->form_validation->set_rules('introduction', 'pengertian program', 'required');
 				
-				if ($this->form_validation->run() == FALSE)
-				{
-					validation_errors();
-				}
-				else
+				if ($this->form_validation->run() == TRUE)
 				{
 					$param = array();
 					$param['id_program'] = $data['id'];
@@ -214,11 +205,7 @@ class Program extends CI_Controller {
 			$this->form_validation->set_rules('target_participant', 'persyaratan peserta', 'required');
 			$this->form_validation->set_rules('course_content', 'materi pelatihan', 'required');
 			
-			if ($this->form_validation->run() == FALSE)
-			{
-				validation_errors();
-			}
-			else
+			if ($this->form_validation->run() == TRUE)
 			{
 				$param = array();
 				$param['id_program'] = $id_program;
@@ -294,27 +281,22 @@ class Program extends CI_Controller {
 	{
 		$data = array();
 		$data['id'] = $this->input->get('id');
-		
 		$query2 = $this->program_sub_model->info(array('id_program_sub' => $data['id']));
 		
 		if ($query2->code == 200)
 		{
 			if ($this->input->post('submit') == TRUE)
 			{
-				
 				$this->load->library('form_validation');
 				$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-				$this->form_validation->set_rules('introduction', 'Pengertian Program', 'required');
-				$this->form_validation->set_rules('name', 'Name', 'required');
-				$this->form_validation->set_rules('training_purpose', 'Tujuan Pelatihan', 'required');
-				$this->form_validation->set_rules('target_participant', 'Persyaratan Peserta', 'required');
-				$this->form_validation->set_rules('course_content', 'Materi Pelatihan', 'required');
+				$this->form_validation->set_message('required', '%s harus diisi');
+				$this->form_validation->set_rules('name', 'nama', 'required');
+				$this->form_validation->set_rules('introduction', 'pengertian program', 'required');
+				$this->form_validation->set_rules('training_purpose', 'tujuan pelatihan', 'required');
+				$this->form_validation->set_rules('target_participant', 'persyaratan peserta', 'required');
+				$this->form_validation->set_rules('course_content', 'materi pelatihan', 'required');
 				
-				if ($this->form_validation->run() == FALSE)
-				{
-					validation_errors();
-				}
-				else
+				if ($this->form_validation->run() == TRUE)
 				{
 					$param = array();
 					$param['id_program_sub'] = $data['id'];

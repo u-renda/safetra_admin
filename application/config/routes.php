@@ -68,11 +68,13 @@ $route['article_lists'] = 'article/article_lists';
 
 $route['client_create'] = 'client/client_create';
 $route['client_delete'] = 'client/client_delete';
+$route['client_edit'] = 'client/client_edit';
 $route['client_get'] = 'client/client_get';
 $route['client_lists'] = 'client/client_lists';
 
 $route['company_create'] = 'company/company_create';
 $route['company_delete'] = 'company/company_delete';
+$route['company_edit'] = 'company/company_edit';
 $route['company_get'] = 'company/company_get';
 $route['company_lists'] = 'company/company_lists';
 
@@ -94,6 +96,7 @@ $route['media_lists'] = 'media/media_lists';
 
 $route['member_create'] = 'member/member_create';
 $route['member_delete'] = 'member/member_delete';
+$route['member_edit'] = 'member/member_edit';
 $route['member_get'] = 'member/member_get';
 $route['member_lists'] = 'member/member_lists';
 
@@ -119,10 +122,12 @@ $route['program_sub_lists'] = 'program/program_sub_lists';
 
 $route['slider_create'] = 'slider/slider_create';
 $route['slider_delete'] = 'slider/slider_delete';
+$route['slider_edit'] = 'slider/slider_edit';
 $route['slider_get'] = 'slider/slider_get';
 $route['slider_lists'] = 'slider/slider_lists';
 
 $route['testimony_create'] = 'testimony/testimony_create';
 $route['testimony_delete'] = 'testimony/testimony_delete';
+$route['testimony_edit'] = 'testimony/testimony_edit';
 $route['testimony_get'] = 'testimony/testimony_get';
 $route['testimony_lists'] = 'testimony/testimony_lists';

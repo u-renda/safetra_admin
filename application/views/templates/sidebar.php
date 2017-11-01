@@ -20,7 +20,7 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-parent list-parent">
+                    <li class="nav-parent list-parent" id="admin">
                         <a>
                             <i class="fa fa-user-secret" aria-hidden="true"></i>
                             <span>Admin</span>
@@ -38,7 +38,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-parent list-parent">
+                    <li class="nav-parent list-parent" id="article">
                         <a>
                             <i class="fa fa-files-o" aria-hidden="true"></i>
                             <span>Article</span>
@@ -56,7 +56,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-parent list-parent">
+                    <li class="nav-parent list-parent" id="client">
                         <a>
                             <i class="fa fa-empire" aria-hidden="true"></i>
                             <span>Client</span>
@@ -74,7 +74,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-parent list-parent">
+                    <li class="nav-parent list-parent" id="company">
                         <a>
                             <i class="fa fa-slack" aria-hidden="true"></i>
                             <span>Company</span>
@@ -110,7 +110,7 @@
                             </li>
                         </ul>
                     </li>-->
-                    <li class="nav-parent list-parent">
+                    <li class="nav-parent list-parent" id="member">
                         <a>
                             <i class="fa fa-users" aria-hidden="true"></i>
                             <span>Member</span>
@@ -128,7 +128,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-parent list-parent">
+                    <li class="nav-parent list-parent" id="slider">
                         <a>
                             <i class="fa fa-sliders" aria-hidden="true"></i>
                             <span>Slider</span>
@@ -146,7 +146,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-parent list-parent">
+                    <li class="nav-parent list-parent" id="preferences">
                         <a>
                             <i class="fa fa-asterisk" aria-hidden="true"></i>
                             <span>Preferences</span>
@@ -182,7 +182,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-parent list-parent">
+                    <li class="nav-parent list-parent" id="testimony">
                         <a>
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             <span>Testimony</span>

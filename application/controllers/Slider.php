@@ -48,11 +48,7 @@ class Slider extends CI_Controller {
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 			$this->form_validation->set_rules('slider_url', 'foto', 'callback_check_media');
 			
-			if ($this->form_validation->run() == FALSE)
-			{
-				validation_errors();
-			}
-			else
+			if ($this->form_validation->run() == TRUE)
 			{
 				$param = array();
 				$param['slider_url'] = $this->processMedia;
@@ -110,6 +106,53 @@ class Slider extends CI_Controller {
             echo "Data Not Found";
         }
 	}
+
+    function slider_edit()
+    {
+        $data = array();
+		$data['id'] = $this->input->get_post('id');
+        $get = $this->slider_model->info(array('id_slider' => $data['id']));
+
+        if ($get->code == 200)
+        {
+            if ($this->input->post('submit') == TRUE)
+            {
+				$this->load->library('form_validation');
+				$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+				$this->form_validation->set_rules('slider_url', 'foto', 'callback_check_media');
+
+                if ($this->form_validation->run() == TRUE)
+                {
+					$param = array();
+					if ($this->processMedia != '')
+					{
+						$param['slider_url'] = $this->processMedia;
+					}
+					
+					$param['id_slider'] = $data['id'];
+					$query = $this->slider_model->update($param);
+					
+					if ($query->code == 200)
+					{
+						redirect($this->config->item('link_slider_lists').'?msg=success&type=edit');
+					}
+					else
+					{
+						redirect($this->config->item('link_slider_lists').'?msg=error&type=edit');
+					}
+				}
+            }
+			
+            $data['result'] = $get->result;
+            $data['view_content'] = 'slider/slider_edit';
+        }
+        else
+        {
+            $data['view_content'] = 'errors/data_not_found';
+        }
+		
+		$this->load->view('templates/frame', $data);
+    }
 
     function slider_get()
     {

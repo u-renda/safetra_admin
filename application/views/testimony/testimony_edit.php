@@ -17,38 +17,38 @@
     </header>
 
     <!-- start: page -->
-    <div class="row" id="testimony_create_page">
+    <div class="row" id="testimony_edit_page">
         <div class="col-md-12">
             <section class="panel panel-featured">
                 <header class="panel-heading">
-                    <h2 class="panel-title">Tambah Baru</h2>
+                    <h2 class="panel-title">Ubah Data</h2>
                 </header>
-                <form action="<?php echo $this->config->item('link_testimony_create'); ?>" method="post" class="form-horizontal form-bordered">
+                <form action="<?php echo $this->config->item('link_testimony_edit').'?id='.$id; ?>" method="post" class="form-horizontal form-bordered">
                     <div class="panel-body">
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><span class="text-danger">*</span> Nama:</label>
                             <div class="col-sm-9">
-                                <input type="text" name="name" class="form-control" value="<?php echo set_value('name'); ?>">
+                                <input type="text" name="name" class="form-control" value="<?php echo set_value('name', $result->name); ?>">
                                 <?php echo form_error('name'); ?>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><span class="text-danger">*</span> Perusahaan & Jabatan:</label>
                             <div class="col-sm-9">
-                                <input type="text" name="job_title" class="form-control" value="<?php echo set_value('job_title'); ?>">
+                                <input type="text" name="job_title" class="form-control" value="<?php echo set_value('job_title', $result->job_title); ?>">
                                 <?php echo form_error('job_title'); ?>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label"><span class="text-danger">*</span> Testimoni:</label>
                             <div class="col-sm-9">
-                                <textarea rows="5" name="testimony" class="form-control"><?php echo set_value('testimony'); ?></textarea>
+                                <textarea rows="5" name="testimony" class="form-control"><?php echo set_value('testimony', $result->testimony); ?></textarea>
                                 <?php echo form_error('testimony'); ?>
                             </div>
                         </div>
                     </div>
                     <footer class="panel-footer">
-                        <input type="submit" class="btn btn-primary" name="submit" value="Tambah" id="submit_testimony_create" />
+                        <input type="submit" class="btn btn-primary" name="submit" value="Ubah" id="submit_testimony_edit" />
                         <a type="button" class="btn btn-default" href="<?php echo $this->config->item('link_testimony_lists'); ?>">Batal</a>
                     </footer>
                 </form>

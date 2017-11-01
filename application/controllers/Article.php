@@ -27,11 +27,7 @@ class Article extends CI_Controller {
 			$this->form_validation->set_rules('tags', 'tags', 'required');
 			$this->form_validation->set_rules('media', 'foto', 'callback_check_media');
 			
-			if ($this->form_validation->run() == FALSE)
-			{
-				validation_errors();
-			}
-			else
+			if ($this->form_validation->run() == TRUE)
 			{
 				$param = array();
 				$param['title'] = $this->input->post('title');
@@ -105,22 +101,23 @@ class Article extends CI_Controller {
             {
                 $this->load->library('form_validation');
 				$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-				$this->form_validation->set_rules('title', 'Title', 'required');
-				$this->form_validation->set_rules('content', 'Content', 'required');
-				$this->form_validation->set_rules('tags', 'Tags', 'required');
-				$this->form_validation->set_rules('media', 'Media', 'callback_check_media');
+				$this->form_validation->set_message('required', '%s harus diisi');
+				$this->form_validation->set_rules('title', 'judul', 'required');
+				$this->form_validation->set_rules('content', 'isi', 'required');
+				$this->form_validation->set_rules('tags', 'tags', 'required');
+				$this->form_validation->set_rules('media', 'foto', 'callback_check_media');
 
-                if ($this->form_validation->run() == FALSE)
+                if ($this->form_validation->run() == TRUE)
                 {
-                    validation_errors();
-                }
-				else
-				{
 					$param = array();
+					if ($this->processMedia != '')
+					{
+						$param['media'] = $this->processMedia;
+					}
+					
 					$param['id_article'] = $data['id'];
 					$param['title'] = $this->input->post('title');
 					$param['content'] = $this->input->post('content');
-					$param['media'] = $this->processMedia;
 					$param['tags'] = $this->input->post('tags');
 					$query = $this->article_model->update($param);
 					
