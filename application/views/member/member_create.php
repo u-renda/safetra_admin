@@ -21,12 +21,12 @@
         <div class="col-md-12">
             <section class="panel panel-featured">
                 <header class="panel-heading">
-                    <h2 class="panel-title">Member Create</h2>
+                    <h2 class="panel-title">Tambah Baru</h2>
                 </header>
                 <form action="<?php echo $this->config->item('link_member_create'); ?>" method="post" class="form-horizontal form-bordered">
                     <div class="panel-body">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"><span class="text-danger">*</span> Company:</label>
+                            <label class="col-sm-3 control-label"><span class="text-danger">*</span> Perusahaan:</label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="id_company">
                                     <option value="">-- Pilih Salah Satu --</option>
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"><span class="text-danger">*</span> Name:</label>
+                            <label class="col-sm-3 control-label"><span class="text-danger">*</span> Nama:</label>
                             <div class="col-sm-9">
                                 <input type="text" name="name" class="form-control" value="<?php echo set_value('name'); ?>">
                                 <?php echo form_error('name'); ?>
@@ -52,17 +52,17 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"><span class="text-danger">*</span> Password:</label>
-                            <div class="col-sm-9">
-                                <input type="password" name="password" class="form-control" value="<?php echo set_value('password'); ?>">
-                                <?php echo form_error('password'); ?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label"><span class="text-danger">*</span> Phone Number:</label>
+                            <label class="col-sm-3 control-label"><span class="text-danger">*</span> Telp:</label>
                             <div class="col-sm-9">
                                 <input type="text" name="phone_number" class="form-control" value="<?php echo set_value('phone_number'); ?>">
                                 <?php echo form_error('phone_number'); ?>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"> Password:</label>
+                            <div class="col-sm-9">
+                                <input type="password" name="password" class="form-control">
+                                <?php echo form_error('password'); ?>
                             </div>
                         </div>
                     </div>

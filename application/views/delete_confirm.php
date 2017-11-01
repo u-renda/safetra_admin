@@ -1,5 +1,5 @@
 <div class="pb-lg" id="confirm">
-    Are you sure you want to delete this data?
+    Anda yakin mau menghapus data ini?
 </div>
 <div class="form-button right">
     <input type="submit" id="yes" name="yes" class="btn btn-primary" value="Yes" />

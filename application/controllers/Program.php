@@ -22,8 +22,9 @@ class Program extends CI_Controller {
 		{
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+			$this->form_validation->set_message('required', '%s harus diisi');
 			$this->form_validation->set_rules('name', 'Name', 'required');
-			$this->form_validation->set_rules('introduction', 'Pengertian Program', 'required');
+			$this->form_validation->set_rules('introduction', 'pengertian program', 'required');
 			
 			if ($this->form_validation->run() == FALSE)
 			{
@@ -171,13 +172,12 @@ class Program extends CI_Controller {
         foreach ($query->result as $row)
         {
             $action = '<a title="Add Sub-program" href="program_sub_create?id='.$row->id_program.'"><i class="fa fa-plus font16"></i></a>&nbsp;
-						<a title="View Sub Program" href="program_sub_lists?id='.$row->id_program.'"><i class="fa fa-external-link font16 text-success"></i></a>&nbsp;
 						<a title="Edit" href="program_edit?id='.$row->id_program.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
                         <a title="Delete" id="'.$row->id_program.'" class="delete '.$row->id_program.'-delete" href="#"><i class="fa fa-times font16 text-danger"></i></a>';
 			
 			$entry = array(
                 'No' => $i,
-                'Name' => ucwords($row->name),
+                'Name' => '<a title="View Sub Program" href="program_sub_lists?id='.$row->id_program.'">'.ucwords($row->name).'</a>',
                 'Introduction' => $row->introduction,
                 'Action' => $action
             );
@@ -207,11 +207,12 @@ class Program extends CI_Controller {
 		{
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-			$this->form_validation->set_rules('name', 'Name', 'required');
-			$this->form_validation->set_rules('introduction', 'Pengertian Program', 'required');
-			$this->form_validation->set_rules('training_purpose', 'Tujuan Pelatihan', 'required');
-			$this->form_validation->set_rules('target_participant', 'Persyaratan Peserta', 'required');
-			$this->form_validation->set_rules('course_content', 'Materi Pelatihan', 'required');
+			$this->form_validation->set_message('required', '%s harus diisi');
+			$this->form_validation->set_rules('name', 'nama', 'required');
+			$this->form_validation->set_rules('introduction', 'pengertian program', 'required');
+			$this->form_validation->set_rules('training_purpose', 'tujuan pelatihan', 'required');
+			$this->form_validation->set_rules('target_participant', 'persyaratan peserta', 'required');
+			$this->form_validation->set_rules('course_content', 'materi pelatihan', 'required');
 			
 			if ($this->form_validation->run() == FALSE)
 			{

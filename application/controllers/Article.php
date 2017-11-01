@@ -21,10 +21,11 @@ class Article extends CI_Controller {
 		{
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-			$this->form_validation->set_rules('title', 'Title', 'required');
-			$this->form_validation->set_rules('content', 'Content', 'required');
-			$this->form_validation->set_rules('tags', 'Tags', 'required');
-			$this->form_validation->set_rules('media', 'Media', 'callback_check_media');
+			$this->form_validation->set_message('required', '%s harus diisi');
+			$this->form_validation->set_rules('title', 'judul', 'required');
+			$this->form_validation->set_rules('content', 'isi', 'required');
+			$this->form_validation->set_rules('tags', 'tags', 'required');
+			$this->form_validation->set_rules('media', 'foto', 'callback_check_media');
 			
 			if ($this->form_validation->run() == FALSE)
 			{

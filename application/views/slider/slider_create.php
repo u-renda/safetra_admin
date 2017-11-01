@@ -21,13 +21,13 @@
         <div class="col-md-12">
             <section class="panel panel-featured">
                 <header class="panel-heading">
-                    <h2 class="panel-title">Slider Create</h2>
+                    <h2 class="panel-title">Tambah Baru</h2>
                 </header>
                 <form action="<?php echo $this->config->item('link_slider_create'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
                     <div class="panel-body">
                         
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Image:</label>
+                            <label class="col-sm-2 control-label">Foto:</label>
                             <div class="col-sm-10">
                                 <div class="fileupload fileupload-new" data-provides="fileupload">
                                     <div class="input-append">

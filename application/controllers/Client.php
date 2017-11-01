@@ -21,8 +21,9 @@ class Client extends CI_Controller {
 		{
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-			$this->form_validation->set_rules('name', 'Name', 'required');
-			$this->form_validation->set_rules('logo', 'Logo', 'callback_check_media');
+			$this->form_validation->set_message('required', '%s harus diisi');
+			$this->form_validation->set_rules('name', 'nama', 'required');
+			$this->form_validation->set_rules('logo', 'logo', 'callback_check_media');
 			
 			if ($this->form_validation->run() == FALSE)
 			{

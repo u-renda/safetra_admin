@@ -21,19 +21,19 @@
         <div class="col-md-12">
             <section class="panel panel-featured">
                 <header class="panel-heading">
-                    <h2 class="panel-title">Sub Program Create - <?php echo $program->name;?></h2>
+                    <h2 class="panel-title">Tambah Baru - <?php echo $program->name;?></h2>
                 </header>
                 <form action="<?php echo $this->config->item('link_program_sub_create').'?id='.$program->id_program; ?>" method="post" class="form-horizontal form-bordered">
                     <div class="panel-body">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"><span class="text-danger">*</span> Nama Program:</label>
+                            <label class="col-sm-3 control-label"><span class="text-danger">*</span> Nama Sub Program:</label>
                             <div class="col-sm-9">
                                 <input type="text" name="name" class="form-control" value="<?php echo set_value('name'); ?>">
                                 <?php echo form_error('name'); ?>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label"><span class="text-danger">*</span> Pengertian Program:</label>
+                            <label class="col-sm-3 control-label"><span class="text-danger">*</span> Pengertian Sub Program:</label>
                             <div class="col-sm-9">
                                 <textarea rows="5" name="introduction" class="form-control mceEditor"><?php echo set_value('introduction'); ?></textarea>
                                 <?php echo form_error('introduction'); ?>

@@ -21,12 +21,12 @@
         <div class="col-md-12">
             <section class="panel panel-featured">
                 <header class="panel-heading">
-                    <h2 class="panel-title">Client Create</h2>
+                    <h2 class="panel-title">Tambah Baru</h2>
                 </header>
                 <form action="<?php echo $this->config->item('link_client_create'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
                     <div class="panel-body">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><span class="text-danger">*</span> Name:</label>
+                            <label class="col-sm-2 control-label"><span class="text-danger">*</span> Nama:</label>
                             <div class="col-sm-10">
                                 <input type="text" name="name" class="form-control" value="<?php echo set_value('name'); ?>">
                                 <?php echo form_error('name'); ?>
@@ -56,7 +56,6 @@
                             <label class="col-sm-2 control-label">Client URL:</label>
                             <div class="col-sm-10">
                                 <input type="text" name="client_url" class="form-control" value="<?php echo set_value('client_url'); ?>">
-                                <?php echo form_error('client_url'); ?>
                             </div>
                         </div>
                     </div>

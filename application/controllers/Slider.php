@@ -46,7 +46,7 @@ class Slider extends CI_Controller {
 		{
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-			$this->form_validation->set_rules('slider_url', 'File', 'callback_check_media');
+			$this->form_validation->set_rules('slider_url', 'foto', 'callback_check_media');
 			
 			if ($this->form_validation->run() == FALSE)
 			{

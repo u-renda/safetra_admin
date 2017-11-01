@@ -21,13 +21,16 @@ class Admin extends CI_Controller {
 		{
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-			$this->form_validation->set_rules('name', 'Name', 'required');
-			$this->form_validation->set_rules('username', 'Username', 'required|callback_check_username');
-			$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
-			$this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_check_email');
-			$this->form_validation->set_rules('role', 'Role', 'required');
-			$this->form_validation->set_rules('job_title', 'Job Title', 'required');
-			$this->form_validation->set_rules('photo', 'Photo', 'callback_check_media');
+			$this->form_validation->set_message('required', '%s harus diisi');
+			$this->form_validation->set_message('min_length', '%s minimal 6 karakter');
+			$this->form_validation->set_message('valid_email', 'Format %s salah');
+			$this->form_validation->set_rules('name', 'nama', 'required');
+			$this->form_validation->set_rules('username', 'username', 'required|callback_check_username');
+			$this->form_validation->set_rules('password', 'password', 'required|min_length[6]');
+			$this->form_validation->set_rules('email', 'email', 'required|valid_email|callback_check_email');
+			$this->form_validation->set_rules('role', 'peran di admin', 'required');
+			$this->form_validation->set_rules('job_title', 'jabatan kerja', 'required');
+			$this->form_validation->set_rules('photo', 'foto', 'callback_check_media');
 			
 			if ($this->form_validation->run() == FALSE)
 			{

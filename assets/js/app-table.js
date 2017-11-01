@@ -101,7 +101,7 @@ $(function () {
                     $('.'+id+'-delete').html('<i class="fa fa-times font16 text-danger"></i>');
                     $('.modal-dialog').removeClass('modal-lg');
                     $('.modal-dialog').addClass('modal-sm');
-                    $('.modal-title').text('Confirm Delete');
+                    $('.modal-title').text('Yakin Hapus?');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -232,7 +232,7 @@ $(function () {
                     $('.'+id+'-delete').html('<i class="fa fa-times font16 text-danger"></i>');
                     $('.modal-dialog').removeClass('modal-lg');
                     $('.modal-dialog').addClass('modal-sm');
-                    $('.modal-title').text('Confirm Delete');
+                    $('.modal-title').text('Yakin Hapus?');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -364,7 +364,7 @@ $(function () {
                     $('.'+id+'-delete').html('<i class="fa fa-times font16 text-danger"></i>');
                     $('.modal-dialog').removeClass('modal-lg');
                     $('.modal-dialog').addClass('modal-sm');
-                    $('.modal-title').text('Confirm Delete');
+                    $('.modal-title').text('Yakin Hapus?');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -489,7 +489,7 @@ $(function () {
                     $('.'+id+'-delete').html('<i class="fa fa-times font16 text-danger"></i>');
                     $('.modal-dialog').removeClass('modal-lg');
                     $('.modal-dialog').addClass('modal-sm');
-                    $('.modal-title').text('Confirm Delete');
+                    $('.modal-title').text('Yakin Hapus?');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -614,7 +614,7 @@ $(function () {
                     $('.'+id+'-delete').html('<i class="fa fa-times font16 text-danger"></i>');
                     $('.modal-dialog').removeClass('modal-lg');
                     $('.modal-dialog').addClass('modal-sm');
-                    $('.modal-title').text('Confirm Delete');
+                    $('.modal-title').text('Yakin Hapus?');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -751,7 +751,7 @@ $(function () {
                     $('.'+id+'-delete').html('<i class="fa fa-times font16 text-danger"></i>');
                     $('.modal-dialog').removeClass('modal-lg');
                     $('.modal-dialog').addClass('modal-sm');
-                    $('.modal-title').text('Confirm Delete');
+                    $('.modal-title').text('Yakin Hapus?');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -882,7 +882,7 @@ $(function () {
                     $('.'+id+'-delete').html('<i class="fa fa-times font16 text-danger"></i>');
                     $('.modal-dialog').removeClass('modal-lg');
                     $('.modal-dialog').addClass('modal-sm');
-                    $('.modal-title').text('Confirm Delete');
+                    $('.modal-title').text('Yakin Hapus?');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -976,7 +976,8 @@ $(function () {
             {
                 field: "Name",
                 filterable: false,
-                width: 150
+                width: 150,
+                template: "#= data.Name #"
             },
             {
                 field: "Introduction",
@@ -1013,7 +1014,7 @@ $(function () {
                     $('.'+id+'-delete').html('<i class="fa fa-times font16 text-danger"></i>');
                     $('.modal-dialog').removeClass('modal-lg');
                     $('.modal-dialog').addClass('modal-sm');
-                    $('.modal-title').text('Confirm Delete');
+                    $('.modal-title').text('Yakin Hapus?');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -1146,7 +1147,7 @@ $(function () {
                     $('.'+id+'-delete').html('<i class="fa fa-times font16 text-danger"></i>');
                     $('.modal-dialog').removeClass('modal-lg');
                     $('.modal-dialog').addClass('modal-sm');
-                    $('.modal-title').text('Confirm Delete');
+                    $('.modal-title').text('Yakin Hapus?');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -1240,7 +1241,7 @@ $(function () {
                     $('.'+id+'-delete').html('<i class="fa fa-times font16 text-danger"></i>');
                     $('.modal-dialog').removeClass('modal-lg');
                     $('.modal-dialog').addClass('modal-sm');
-                    $('.modal-title').text('Confirm Delete');
+                    $('.modal-title').text('Yakin Hapus?');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -1351,7 +1352,7 @@ $(function () {
                     $('.'+id+'-delete').html('<i class="fa fa-times font16 text-danger"></i>');
                     $('.modal-dialog').removeClass('modal-lg');
                     $('.modal-dialog').addClass('modal-sm');
-                    $('.modal-title').text('Confirm Delete');
+                    $('.modal-title').text('Yakin Hapus?');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }

@@ -21,9 +21,8 @@ class Company extends CI_Controller {
 		{
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-			$this->form_validation->set_rules('name', 'Name', 'required|callback_check_name');
-			$this->form_validation->set_rules('pic_name', 'PIC Name', 'required');
-			$this->form_validation->set_rules('phone_number', 'Phone Number', 'required|numeric');
+			$this->form_validation->set_message('required', '%s harus diisi');
+			$this->form_validation->set_rules('name', 'nama', 'required|callback_check_name');
 			$this->form_validation->set_rules('logo', 'Logo', 'callback_check_media');
 			
 			if ($this->form_validation->run() == FALSE)
@@ -34,9 +33,7 @@ class Company extends CI_Controller {
 			{
 				$param = array();
 				$param['name'] = $this->input->post('name');
-				$param['pic_name'] = $this->input->post('pic_name');
 				$param['logo'] = $this->processMedia;
-				$param['phone_number'] = $this->input->post('phone_number');
 				$query = $this->company_model->create($param);
 				
 				if ($query->code == 200)

@@ -21,8 +21,9 @@ class Preferences extends CI_Controller {
 		{
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-			$this->form_validation->set_rules('name', 'Name', 'required');
-			$this->form_validation->set_rules('content', 'Content', 'required');
+			$this->form_validation->set_message('required', '%s harus diisi');
+			$this->form_validation->set_rules('name', 'nama', 'required');
+			$this->form_validation->set_rules('content', 'isi', 'required');
 			
 			if ($this->form_validation->run() == FALSE)
 			{
@@ -113,7 +114,7 @@ class Preferences extends CI_Controller {
 					$param['id_preferences'] = $data['id'];
 					$param['name'] = $this->input->post('name');
 					$param['content'] = $this->input->post('content');
-					//print_r($param);die();
+					
 					$query = $this->preferences_model->update($param);
 					
 					if ($query->code == 200)

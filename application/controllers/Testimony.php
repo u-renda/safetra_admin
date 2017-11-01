@@ -21,9 +21,10 @@ class Testimony extends CI_Controller {
 		{
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-			$this->form_validation->set_rules('name', 'Name', 'required');
-			$this->form_validation->set_rules('job_title', 'Job Title', 'required');
-			$this->form_validation->set_rules('testimony', 'Testimony', 'required');
+			$this->form_validation->set_message('required', '%s harus diisi');
+			$this->form_validation->set_rules('name', 'nama', 'required');
+			$this->form_validation->set_rules('job_title', 'perusahaan & jabatan', 'required');
+			$this->form_validation->set_rules('testimony', 'testimoni', 'required');
 			
 			if ($this->form_validation->run() == FALSE)
 			{

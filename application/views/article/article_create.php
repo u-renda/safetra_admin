@@ -21,19 +21,19 @@
         <div class="col-md-12">
             <section class="panel panel-featured">
                 <header class="panel-heading">
-                    <h2 class="panel-title">Article Create</h2>
+                    <h2 class="panel-title">Tambah Baru</h2>
                 </header>
                 <form action="<?php echo $this->config->item('link_article_create'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
                     <div class="panel-body">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><span class="text-danger">*</span> Title:</label>
+                            <label class="col-sm-2 control-label"><span class="text-danger">*</span> Judul:</label>
                             <div class="col-sm-10">
                                 <input type="text" name="title" class="form-control" value="<?php echo set_value('title'); ?>">
                                 <?php echo form_error('title'); ?>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><span class="text-danger">*</span> Content:</label>
+                            <label class="col-sm-2 control-label"><span class="text-danger">*</span> Isi:</label>
                             <div class="col-sm-10">
                                 <textarea rows="5" name="content" class="form-control mceEditor"><?php echo set_value('content'); ?></textarea>
                                 <?php echo form_error('content'); ?>
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Media:</label>
+                            <label class="col-sm-2 control-label">Foto:</label>
                             <div class="col-sm-10">
                                 <div class="fileupload fileupload-new" data-provides="fileupload">
                                     <div class="input-append">

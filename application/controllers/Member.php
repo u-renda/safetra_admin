@@ -22,11 +22,15 @@ class Member extends CI_Controller {
 		{
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-			$this->form_validation->set_rules('id_company', 'ID Company', 'required');
-			$this->form_validation->set_rules('name', 'Name', 'required');
-			$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-			$this->form_validation->set_rules('password', 'Password', 'required');
-			$this->form_validation->set_rules('phone_number', 'Phone Number', 'required|numeric');
+			$this->form_validation->set_message('required', '%s harus diisi');
+			$this->form_validation->set_message('valid_email', 'Format %s salah');
+			$this->form_validation->set_message('numeric', 'Hanya diisi dengan angka');
+			$this->form_validation->set_message('min_length', '%s minimal 5 karakter');
+			$this->form_validation->set_rules('id_company', 'perusahaan', 'required');
+			$this->form_validation->set_rules('name', 'nama', 'required');
+			$this->form_validation->set_rules('email', 'email', 'required|valid_email');
+			$this->form_validation->set_rules('password', 'password', 'min_length[5]');
+			$this->form_validation->set_rules('phone_number', 'telp', 'required|numeric');
 			
 			if ($this->form_validation->run() == FALSE)
 			{
