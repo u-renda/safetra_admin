@@ -49,6 +49,7 @@
                     </div>
                     <footer class="panel-footer">
                         <input type="submit" class="btn btn-primary" name="submit" value="Create" id="submit_testimony_create" />
+                        <a type="button" class="btn btn-default" href="<?php echo $this->config->item('link_testimony_lists'); ?>">Batal</a>
                     </footer>
                 </form>
             </section>

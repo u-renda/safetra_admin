@@ -461,18 +461,6 @@ $(function () {
                 width: 150
             },
             {
-                field: "PICname",
-                title: "PIC Name",
-                filterable: false,
-                sortable: false,
-                width: 150
-            },
-            {
-                field: "Phone",
-                filterable: false,
-                width: 150
-            },
-            {
                 field: "Action",
                 sortable: false,
                 filterable: false,
@@ -733,12 +721,6 @@ $(function () {
                 filterable: false,
                 sortable: false,
                 width: 100
-            },
-            {
-                field: "Status",
-                filterable: false,
-                sortable: false,
-                width: 60
             },
             {
                 field: "Action",

@@ -577,3 +577,9 @@ $config['code_admin_role'] = array(
 $config['code_admin_status'] = array(
     1 => 'Active'
 );
+
+$config['code_member_status'] = array(
+    1 => 'Registered',
+    2 => 'Attended',
+    3 => 'Not Attended'
+);

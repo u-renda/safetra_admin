@@ -24,6 +24,7 @@
                     <h2 class="panel-title">Program Lists</h2>
                 </header>
                 <div class="panel-body">
+                    <a type="button" class="btn btn-success mb-xl" href="<?php echo $this->config->item('link_program_create'); ?>">Tambah Baru</a>
                     <?php
                     if ($msg == TRUE)
                     {
@@ -41,7 +42,6 @@
                         }
                     }
                     ?>
-                    <a href="<?php echo $this->config->item('link_program_create'); ?>" type="button" class="btn btn-primary mb-xl">Tambah</a>
                     <div id="multipleTable"></div>
                 </div>
             </section>

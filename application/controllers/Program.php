@@ -392,7 +392,9 @@ class Program extends CI_Controller {
 		if ($this->input->get_post('id') == FALSE) { redirect($this->config->item('link_program_lists')); }
 		
 		$data = array();
-		$query2 = $this->program_model->info(array('id_program' => $this->input->get_post('id')));
+		$data['id_program'] = $this->input->get_post('id');
+		
+		$query2 = $this->program_model->info(array('id_program' => $data['id_program']));
 		
 		if ($query2->code == 200)
 		{

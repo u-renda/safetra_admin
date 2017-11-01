@@ -24,6 +24,8 @@
                     <h2 class="panel-title">Sub Program Lists - <?php echo $program->name; ?></h2>
                 </header>
                 <div class="panel-body">
+                    <a type="button" class="btn btn-success mb-xl" href="<?php echo $this->config->item('link_program_sub_create').'?id='.$id_program; ?>">Tambah Baru</a>
+                    <a type="button" class="btn btn-primary mb-xl" href="<?php echo $this->config->item('link_program_lists'); ?>">Back to Program</a>
                     <?php
                     if ($msg == TRUE)
                     {
@@ -44,7 +46,6 @@
                     <div id="multipleTable"></div>
                 </div>
             </section>
-            <a class="btn btn-primary" href="<?php echo $this->config->item('link_program_lists'); ?>">Back to Program</a>
         </div>
     </div>
     <!-- end: page -->

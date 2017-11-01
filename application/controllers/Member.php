@@ -126,6 +126,8 @@ class Member extends CI_Controller {
 
         foreach ($query->result as $row)
         {
+			$code_member_status = $this->config->item('code_member_status');
+			
             $action = '<a title="View" id="'.$row->id_member.'" class="view '.$row->id_member.'-view" href="#"><i class="fa fa-file-text font16"></i></a>&nbsp;
 						<a title="Edit" href="member_edit?id='.$row->id_member.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
                         <a title="Delete" id="'.$row->id_member.'" class="delete '.$row->id_member.'-delete" href="#"><i class="fa fa-times font16 text-danger"></i></a>';
@@ -135,7 +137,6 @@ class Member extends CI_Controller {
                 'Name' => $row->name,
                 'Email' => $row->email,
                 'Phone' => $row->phone_number,
-                'Status' => $row->status,
                 'Action' => $action
             );
 

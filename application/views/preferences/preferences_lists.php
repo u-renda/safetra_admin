@@ -24,6 +24,7 @@
                     <h2 class="panel-title">Preferences Lists</h2>
                 </header>
                 <div class="panel-body">
+                    <a type="button" class="btn btn-success mb-xl" href="<?php echo $this->config->item('link_preferences_create'); ?>">Tambah Baru</a>
                     <?php
                     if ($msg == TRUE)
                     {

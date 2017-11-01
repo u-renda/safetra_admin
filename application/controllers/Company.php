@@ -114,15 +114,12 @@ class Company extends CI_Controller {
 
         foreach ($query->result as $row)
         {
-            $action = '<a title="View" id="'.$row->id_company.'" class="view '.$row->id_company.'-view" href="#"><i class="fa fa-file-text font16"></i></a>&nbsp;
-						<a title="Edit" href="company_edit?id='.$row->id_company.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
+            $action = '<a title="Edit" href="company_edit?id='.$row->id_company.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
                         <a title="Delete" id="'.$row->id_company.'" class="delete '.$row->id_company.'-delete" href="#"><i class="fa fa-times font16 text-danger"></i></a>';
 			
 			$entry = array(
                 'No' => $i,
                 'Name' => ucwords($row->name),
-                'PICname' => ucwords($row->pic_name),
-                'Phone' => $row->phone_number,
                 'Action' => $action
             );
 

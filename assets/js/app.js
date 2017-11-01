@@ -31,9 +31,6 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
         $('.list-dashboard').addClass('nav-active');
     }
     
-    // untuk program sub
-    
-    
     list_child.each(function() {
         var href = $(this).find('a').attr('href');
         var list_parent = $(this).closest("li.list-parent");
@@ -43,6 +40,11 @@ var newPathname = winOrigin + "/" + winPath[1] + "/";
         if (href === newPath) {
             $(this).addClass('nav-active');
             list_parent.addClass('nav-active');
+        }
+        
+        // untuk program sub
+        if (winPath[2] === 'program_sub_lists' || winPath[2] === 'program_sub_create') {
+            $('#program').addClass('nav-active');
         }
     });
     

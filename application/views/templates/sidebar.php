@@ -92,24 +92,24 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-parent list-parent">
+                    <!--<li class="nav-parent list-parent">
                         <a>
                             <i class="fa fa-file-image-o" aria-hidden="true"></i>
                             <span>Media</span>
                         </a>
                         <ul class="nav nav-children">
                             <li class="list-child">
-                                <a href="<?php echo $this->config->item('link_media_album_lists'); ?>">
+                                <a href="<?php //echo $this->config->item('link_media_album_lists'); ?>">
                                      Lists
                                 </a>
                             </li>
                             <li class="list-child">
-                                <a href="<?php echo $this->config->item('link_media_album_create'); ?>">
+                                <a href="<?php //echo $this->config->item('link_media_album_create'); ?>">
                                      Create
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li>-->
                     <li class="nav-parent list-parent">
                         <a>
                             <i class="fa fa-users" aria-hidden="true"></i>
@@ -164,7 +164,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-parent list-parent">
+                    <li class="nav-parent list-parent" id="program">
                         <a>
                             <i class="fa fa-star" aria-hidden="true"></i>
                             <span>Program</span>
