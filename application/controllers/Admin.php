@@ -230,13 +230,9 @@ class Admin extends CI_Controller {
             $code_admin_role = $this->config->item('code_admin_role');
 			
             $data = array();
-            $data['username'] = $result->username;
-            $data['email'] = $result->email;
-            $data['name'] = $result->name;
-            $data['photo'] = $result->photo;
-            $data['status'] = $code_admin_status[$result->status];
-            $data['role'] = $code_admin_role[$result->role];
-            $data['job_title'] = $result->job_title;
+            $data['result'] = $result;
+            $data['code_admin_status'] = $code_admin_status;
+            $data['code_admin_role'] = $code_admin_role;
 			$this->load->view('admin/admin_view', $data);
 		}
 		else

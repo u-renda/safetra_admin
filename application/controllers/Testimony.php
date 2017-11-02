@@ -157,8 +157,7 @@ class Testimony extends CI_Controller {
 
         foreach ($query->result as $row)
         {
-            $action = '<a title="View" id="'.$row->id_testimony.'" class="view '.$row->id_testimony.'-view" href="#"><i class="fa fa-file-text font16"></i></a>&nbsp;
-						<a title="Edit" href="testimony_edit?id='.$row->id_testimony.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
+            $action = '<a title="Edit" href="testimony_edit?id='.$row->id_testimony.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
                         <a title="Delete" id="'.$row->id_testimony.'" class="delete '.$row->id_testimony.'-delete" href="#"><i class="fa fa-times font16 text-danger"></i></a>';
 			
 			$strip = strip_tags($row->testimony);

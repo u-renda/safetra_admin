@@ -187,4 +187,23 @@ class Preferences extends CI_Controller {
 		$data['view_content'] = 'preferences/preferences_lists';
 		$this->load->view('templates/frame', $data);
 	}
+    
+    function preferences_view()
+    {
+		$id = $this->input->post('id');
+		$get = $this->preferences_model->info(array('id_preferences' => $id));
+		
+		if ($get->code == 200)
+		{
+            $result = $get->result;
+			
+            $data = array();
+            $data['result'] = $result;
+			$this->load->view('preferences/preferences_view', $data);
+		}
+		else
+		{
+			echo "Data Not Found";
+		}
+    }
 }

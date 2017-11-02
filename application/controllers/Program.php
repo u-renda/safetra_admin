@@ -162,7 +162,7 @@ class Program extends CI_Controller {
 
         foreach ($query->result as $row)
         {
-            $action = '<a title="Add Sub-program" href="program_sub_create?id='.$row->id_program.'"><i class="fa fa-plus font16"></i></a>&nbsp;
+            $action = '<a title="View" id="'.$row->id_program.'" class="view '.$row->id_program.'-view" href="#"><i class="fa fa-file-text font16"></i></a>&nbsp;
 						<a title="Edit" href="program_edit?id='.$row->id_program.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
                         <a title="Delete" id="'.$row->id_program.'" class="delete '.$row->id_program.'-delete" href="#"><i class="fa fa-times font16 text-danger"></i></a>';
 			
@@ -188,6 +188,25 @@ class Program extends CI_Controller {
 		$data['view_content'] = 'program/program_lists';
 		$this->load->view('templates/frame', $data);
 	}
+    
+    function program_view()
+    {
+		$id = $this->input->post('id');
+		$get = $this->program_model->info(array('id_program' => $id));
+		
+		if ($get->code == 200)
+		{
+            $result = $get->result;
+			
+            $data = array();
+            $data['result'] = $result;
+			$this->load->view('program/program_view', $data);
+		}
+		else
+		{
+			echo "Data Not Found";
+		}
+    }
 	
 	function program_sub_create()
 	{
@@ -353,7 +372,8 @@ class Program extends CI_Controller {
 
         foreach ($query->result as $row)
         {
-            $action = '<a title="Edit" href="program_sub_edit?id='.$row->id_program_sub.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
+            $action = '<a title="View" id="'.$row->id_program_sub.'" class="view '.$row->id_program_sub.'-view" href="#"><i class="fa fa-file-text font16"></i></a>&nbsp;
+						<a title="Edit" href="program_sub_edit?id='.$row->id_program_sub.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
                         <a title="Delete" id="'.$row->id_program_sub.'" class="delete '.$row->id_program_sub.'-delete" href="#"><i class="fa fa-times font16 text-danger"></i></a>';
 			
 			$entry = array(
@@ -389,4 +409,23 @@ class Program extends CI_Controller {
 		$data['view_content'] = 'program/program_sub_lists';
 		$this->load->view('templates/frame', $data);
 	}
+    
+    function program_sub_view()
+    {
+		$id = $this->input->post('id');
+		$get = $this->program_sub_model->info(array('id_program_sub' => $id));
+		
+		if ($get->code == 200)
+		{
+            $result = $get->result;
+			
+            $data = array();
+            $data['result'] = $result;
+			$this->load->view('program/program_sub_view', $data);
+		}
+		else
+		{
+			echo "Data Not Found";
+		}
+    }
 }

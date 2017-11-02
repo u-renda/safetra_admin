@@ -241,4 +241,23 @@ class Member extends CI_Controller {
 		$data['view_content'] = 'member/member_lists';
 		$this->load->view('templates/frame', $data);
 	}
+    
+    function member_view()
+    {
+		$id = $this->input->post('id');
+		$get = $this->member_model->info(array('id_member' => $id));
+		
+		if ($get->code == 200)
+		{
+            $result = $get->result;
+			
+            $data = array();
+            $data['result'] = $result;
+			$this->load->view('member/member_view', $data);
+		}
+		else
+		{
+			echo "Data Not Found";
+		}
+    }
 }

@@ -125,10 +125,10 @@ $(function () {
                 },
                 success: function(data)
                 {
-                    $('.'+id+'-view').html('<span class="fa fa-file-text font16" aria-hidden="true"></span>');
+                    $('.'+id+'-view').html('<i class="fa fa-file-text font16"></i>');
                     $('.modal-dialog').removeClass('modal-sm');
-                    $('.modal-dialog').addClass('modal-lg');
-                    $('.modal-title').text('Member View');
+                    $('.modal-dialog').removeClass('modal-lg');
+                    $('.modal-title').text('Detail Data');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -194,11 +194,13 @@ $(function () {
             },
             {
                 field: "Title",
+                title: "Judul",
                 filterable: false,
                 width: 150
             },
             {
                 field: "Content",
+                title: "Isi",
                 filterable: false,
                 sortable: false,
                 width: 300
@@ -242,7 +244,7 @@ $(function () {
 
         $('body').delegate(".view", "click", function() {
             var id = $(this).attr("id");
-            var action = "member_view";
+            var action = "article_view";
             var dataString = 'id='+ id
             $.ajax(
             {
@@ -256,10 +258,10 @@ $(function () {
                 },
                 success: function(data)
                 {
-                    $('.'+id+'-view').html('<span class="glyphicon glyphicon-folder-open fontblue font16" aria-hidden="true"></span>');
+                    $('.'+id+'-view').html('<i class="fa fa-file-text font16"></i>');
                     $('.modal-dialog').removeClass('modal-sm');
                     $('.modal-dialog').addClass('modal-lg');
-                    $('.modal-title').text('Member View');
+                    $('.modal-title').text('Detail Data');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -325,12 +327,13 @@ $(function () {
             },
             {
                 field: "Name",
+                title: "Nama",
                 filterable: false,
                 width: 150
             },
             {
                 field: "ClientURL",
-                title: "Client URL",
+                title: "Website",
                 filterable: false,
                 sortable: false,
                 width: 300
@@ -374,7 +377,7 @@ $(function () {
 
         $('body').delegate(".view", "click", function() {
             var id = $(this).attr("id");
-            var action = "member_view";
+            var action = "client_view";
             var dataString = 'id='+ id
             $.ajax(
             {
@@ -388,10 +391,10 @@ $(function () {
                 },
                 success: function(data)
                 {
-                    $('.'+id+'-view').html('<span class="glyphicon glyphicon-folder-open fontblue font16" aria-hidden="true"></span>');
+                    $('.'+id+'-view').html('<i class="fa fa-file-text font16"></i>');
                     $('.modal-dialog').removeClass('modal-sm');
-                    $('.modal-dialog').addClass('modal-lg');
-                    $('.modal-title').text('Member View');
+                    $('.modal-dialog').removeClass('modal-lg');
+                    $('.modal-title').text('Detail Data');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -457,6 +460,7 @@ $(function () {
             },
             {
                 field: "Name",
+                title: "Nama",
                 filterable: false,
                 width: 150
             },
@@ -490,33 +494,6 @@ $(function () {
                     $('.modal-dialog').removeClass('modal-lg');
                     $('.modal-dialog').addClass('modal-sm');
                     $('.modal-title').text('Yakin Hapus?');
-                    $('.modal-body').html(data);
-                    $('#myModal').modal('show');
-                }
-            });
-            return false;
-        });
-
-        $('body').delegate(".view", "click", function() {
-            var id = $(this).attr("id");
-            var action = "member_view";
-            var dataString = 'id='+ id
-            $.ajax(
-            {
-                type: "POST",
-                url: newPathname + action,
-                data: dataString,
-                cache: false,
-                beforeSend: function()
-                {
-                    $('.'+id+'-view').html('<i class="fa fa-spinner fa-spin"></i>');
-                },
-                success: function(data)
-                {
-                    $('.'+id+'-view').html('<span class="glyphicon glyphicon-folder-open fontblue font16" aria-hidden="true"></span>');
-                    $('.modal-dialog').removeClass('modal-sm');
-                    $('.modal-dialog').addClass('modal-lg');
-                    $('.modal-title').text('Member View');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -640,7 +617,7 @@ $(function () {
                 {
                     $('.'+id+'-view').html('<span class="glyphicon glyphicon-folder-open fontblue font16" aria-hidden="true"></span>');
                     $('.modal-dialog').removeClass('modal-sm');
-                    $('.modal-dialog').addClass('modal-lg');
+                    $('.modal-dialog').removeClass('modal-lg');
                     $('.modal-title').text('Member View');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
@@ -707,6 +684,7 @@ $(function () {
             },
             {
                 field: "Name",
+                title: "Nama",
                 filterable: false,
                 width: 150
             },
@@ -718,6 +696,7 @@ $(function () {
             },
             {
                 field: "Phone",
+                title: "Telp",
                 filterable: false,
                 sortable: false,
                 width: 100
@@ -775,10 +754,10 @@ $(function () {
                 },
                 success: function(data)
                 {
-                    $('.'+id+'-view').html('<span class="glyphicon glyphicon-folder-open fontblue font16" aria-hidden="true"></span>');
+                    $('.'+id+'-view').html('<i class="fa fa-file-text font16"></i>');
                     $('.modal-dialog').removeClass('modal-sm');
-                    $('.modal-dialog').addClass('modal-lg');
-                    $('.modal-title').text('Member View');
+                    $('.modal-dialog').removeClass('modal-lg');
+                    $('.modal-title').text('Detail Data');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -892,7 +871,7 @@ $(function () {
 
         $('body').delegate(".view", "click", function() {
             var id = $(this).attr("id");
-            var action = "member_view";
+            var action = "preferences_view";
             var dataString = 'id='+ id
             $.ajax(
             {
@@ -906,10 +885,10 @@ $(function () {
                 },
                 success: function(data)
                 {
-                    $('.'+id+'-view').html('<span class="glyphicon glyphicon-folder-open fontblue font16" aria-hidden="true"></span>');
+                    $('.'+id+'-view').html('<i class="fa fa-file-text font16"></i>');
                     $('.modal-dialog').removeClass('modal-sm');
-                    $('.modal-dialog').addClass('modal-lg');
-                    $('.modal-title').text('Member View');
+                    $('.modal-dialog').removeClass('modal-lg');
+                    $('.modal-title').text('Detail Data');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -975,12 +954,14 @@ $(function () {
             },
             {
                 field: "Name",
+                title: "Nama",
                 filterable: false,
                 width: 150,
                 template: "#= data.Name #"
             },
             {
                 field: "Introduction",
+                title: "Pengertian Program",
                 filterable: false,
                 sortable: false,
                 width: 300
@@ -1024,7 +1005,7 @@ $(function () {
 
         $('body').delegate(".view", "click", function() {
             var id = $(this).attr("id");
-            var action = "member_view";
+            var action = "program_view";
             var dataString = 'id='+ id
             $.ajax(
             {
@@ -1038,10 +1019,10 @@ $(function () {
                 },
                 success: function(data)
                 {
-                    $('.'+id+'-view').html('<span class="glyphicon glyphicon-folder-open fontblue font16" aria-hidden="true"></span>');
+                    $('.'+id+'-view').html('<i class="fa fa-file-text font16"></i>');
                     $('.modal-dialog').removeClass('modal-sm');
-                    $('.modal-dialog').addClass('modal-lg');
-                    $('.modal-title').text('Member View');
+                    $('.modal-dialog').removeClass('modal-lg');
+                    $('.modal-title').text('Detail Data');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -1109,11 +1090,13 @@ $(function () {
             },
             {
                 field: "Name",
+                title: "Nama",
                 filterable: false,
-                width: 300
+                width: 150
             },
             {
                 field: "Introduction",
+                title: "Pengertian Program",
                 filterable: false,
                 sortable: false,
                 width: 300
@@ -1122,7 +1105,7 @@ $(function () {
                 field: "Action",
                 sortable: false,
                 filterable: false,
-                width: 60,
+                width: 70,
                 template: "#= data.Action #"
             }]
         });
@@ -1148,6 +1131,33 @@ $(function () {
                     $('.modal-dialog').removeClass('modal-lg');
                     $('.modal-dialog').addClass('modal-sm');
                     $('.modal-title').text('Yakin Hapus?');
+                    $('.modal-body').html(data);
+                    $('#myModal').modal('show');
+                }
+            });
+            return false;
+        });
+
+        $('body').delegate(".view", "click", function() {
+            var id = $(this).attr("id");
+            var action = "program_sub_view";
+            var dataString = 'id='+ id
+            $.ajax(
+            {
+                type: "POST",
+                url: newPathname + action,
+                data: dataString,
+                cache: false,
+                beforeSend: function()
+                {
+                    $('.'+id+'-view').html('<i class="fa fa-spinner fa-spin"></i>');
+                },
+                success: function(data)
+                {
+                    $('.'+id+'-view').html('<i class="fa fa-file-text font16"></i>');
+                    $('.modal-dialog').removeClass('modal-sm');
+                    $('.modal-dialog').removeClass('modal-lg');
+                    $('.modal-title').text('Detail Data');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }
@@ -1208,6 +1218,7 @@ $(function () {
             },
             {
                 field: "Image",
+                title: "Foto",
                 filterable: false,
                 width: 300,
                 template: "#= data.Image #"
@@ -1307,18 +1318,20 @@ $(function () {
             },
             {
                 field: "Name",
+                title: "Nama",
                 filterable: false,
-                width: 150
+                width: 80
             },
             {
                 field: "JobTitle",
-                title: "Job Title",
+                title: "Perusahaan & Jabatan",
                 filterable: false,
                 sortable: false,
-                width: 100
+                width: 150
             },
             {
                 field: "Testimony",
+                title: "Testimoni",
                 filterable: false,
                 sortable: false,
                 width: 300
@@ -1353,33 +1366,6 @@ $(function () {
                     $('.modal-dialog').removeClass('modal-lg');
                     $('.modal-dialog').addClass('modal-sm');
                     $('.modal-title').text('Yakin Hapus?');
-                    $('.modal-body').html(data);
-                    $('#myModal').modal('show');
-                }
-            });
-            return false;
-        });
-
-        $('body').delegate(".view", "click", function() {
-            var id = $(this).attr("id");
-            var action = "member_view";
-            var dataString = 'id='+ id
-            $.ajax(
-            {
-                type: "POST",
-                url: newPathname + action,
-                data: dataString,
-                cache: false,
-                beforeSend: function()
-                {
-                    $('.'+id+'-view').html('<i class="fa fa-spinner fa-spin"></i>');
-                },
-                success: function(data)
-                {
-                    $('.'+id+'-view').html('<span class="glyphicon glyphicon-folder-open fontblue font16" aria-hidden="true"></span>');
-                    $('.modal-dialog').removeClass('modal-sm');
-                    $('.modal-dialog').addClass('modal-lg');
-                    $('.modal-title').text('Member View');
                     $('.modal-body').html(data);
                     $('#myModal').modal('show');
                 }

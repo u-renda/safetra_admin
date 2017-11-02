@@ -25,7 +25,7 @@
                 </header>
                 <div class="panel-body">
                     <a type="button" class="btn btn-success mb-xl" href="<?php echo $this->config->item('link_program_sub_create').'?id='.$id_program; ?>">Tambah Baru</a>
-                    <a type="button" class="btn btn-primary mb-xl" href="<?php echo $this->config->item('link_program_lists'); ?>">Back to Program</a>
+                    <a type="button" class="btn btn-primary mb-xl" href="<?php echo $this->config->item('link_program_lists'); ?>">Kembali ke Program</a>
                     <?php
                     if ($msg == TRUE)
                     {

@@ -1,55 +1,41 @@
-<div class="row">
-    <div class="col-sm-6">
-        <div class="form-group">
-            <label class="control-label marginbottom0"><u>Name:</u></label>
-            <div class="form-control-static paddingtop0"><?php echo ucwords($name); ?></div>
+<form class="form-horizontal form-bordered mb-lg">
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Nama:</label>
+        <div class="col-sm-9">
+            <p class="form-control-static"><?php echo $result->name; ?></p>
         </div>
     </div>
-    <div class="col-sm-6">
-        <div class="form-group">
-            <label class="control-label marginbottom0"><u>Role:</u></label>
-            <div class="form-control-static paddingtop0"><?php echo $role; ?></div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Username:</label>
+        <div class="col-sm-9">
+            <p class="form-control-static"><?php echo $result->username; ?></p>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-sm-6">
-        <div class="form-group">
-            <label class="control-label marginbottom0"><u>Username:</u></label>
-            <div class="form-control-static paddingtop0"><?php echo $username; ?></div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Email:</label>
+        <div class="col-sm-9">
+            <p class="form-control-static"><?php echo $result->email; ?></p>
         </div>
     </div>
-    <div class="col-sm-6">
-        <div class="form-group">
-            <label class="control-label marginbottom0"><u>Email:</u></label>
-            <div class="form-control-static paddingtop0"><?php echo $email; ?></div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Foto:</label>
+        <div class="col-sm-9">
+            <p class="form-control-static"><img src="<?php echo $result->photo; ?>" style="max-height: 300px;"></p>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-sm-6">
-        <div class="form-group">
-            <label class="control-label marginbottom0"><u>Status:</u></label>
-            <div class="form-control-static paddingtop0"><?php echo $status; ?></div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Peran di web:</label>
+        <div class="col-sm-9">
+            <p class="form-control-static"><?php echo $code_admin_role[$result->role]; ?></p>
         </div>
     </div>
-    <div class="col-sm-6">
-        <div class="form-group">
-            <label class="control-label marginbottom0"><u>Job Title:</u></label>
-            <div class="form-control-static paddingtop0"><?php echo $job_title; ?></div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Jabatan:</label>
+        <div class="col-sm-9">
+            <p class="form-control-static"><?php echo $result->job_title; ?></p>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-sm-6">
-        <div class="form-group">
-            <label class="control-label marginbottom0"><u>Photo:</u></label>
-            <img class="paddingtop0 paddingbottom10 fullwidth" src="<?php echo $photo; ?>" alt="<?php echo ucwords($name); ?>">
-        </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
-</div>
-<div class="row">
-    <div class="col-sm-12 margintop15">
-        <button type="button" class="btn pull-right" data-dismiss="modal">Close</button>
-    </div>
-</div>
+</form>

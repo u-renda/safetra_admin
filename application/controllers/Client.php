@@ -5,6 +5,31 @@ class Client extends CI_Controller {
 
 	private $processMedia;
 	
+	function check_media()
+	{
+		if ($_FILES["logo"]["error"] == 0)
+		{
+			$this->load->helper('my');
+			$photo = upload_image($_FILES["logo"]);
+			
+			if (is_array($photo) == FALSE)
+			{
+				$this->processMedia = $photo;
+				return TRUE;
+			}
+			else
+			{
+				$this->form_validation->set_message('check_media', $photo[0]);
+				return FALSE;
+			}
+		}
+		else
+		{
+			$this->processMedia = '';
+			return TRUE;
+		}
+	}
+	
 	function __construct()
     {
         parent::__construct();
@@ -185,29 +210,23 @@ class Client extends CI_Controller {
 		$data['view_content'] = 'client/client_lists';
 		$this->load->view('templates/frame', $data);
 	}
-	
-	function check_media()
-	{
-		if ($_FILES["logo"]["error"] == 0)
+    
+    function client_view()
+    {
+		$id = $this->input->post('id');
+		$get = $this->client_model->info(array('id_client' => $id));
+		
+		if ($get->code == 200)
 		{
-			$this->load->helper('my');
-			$photo = upload_image($_FILES["logo"]);
+            $result = $get->result;
 			
-			if (is_array($photo) == FALSE)
-			{
-				$this->processMedia = $photo;
-				return TRUE;
-			}
-			else
-			{
-				$this->form_validation->set_message('check_media', $photo[0]);
-				return FALSE;
-			}
+            $data = array();
+            $data['result'] = $result;
+			$this->load->view('client/client_view', $data);
 		}
 		else
 		{
-			$this->processMedia = '';
-			return TRUE;
+			echo "Data Not Found";
 		}
-	}
+    }
 }

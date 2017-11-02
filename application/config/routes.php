@@ -65,12 +65,14 @@ $route['article_delete'] = 'article/article_delete';
 $route['article_edit'] = 'article/article_edit';
 $route['article_get'] = 'article/article_get';
 $route['article_lists'] = 'article/article_lists';
+$route['article_view'] = 'article/article_view';
 
 $route['client_create'] = 'client/client_create';
 $route['client_delete'] = 'client/client_delete';
 $route['client_edit'] = 'client/client_edit';
 $route['client_get'] = 'client/client_get';
 $route['client_lists'] = 'client/client_lists';
+$route['client_view'] = 'client/client_view';
 
 $route['company_create'] = 'company/company_create';
 $route['company_delete'] = 'company/company_delete';
@@ -99,12 +101,14 @@ $route['member_delete'] = 'member/member_delete';
 $route['member_edit'] = 'member/member_edit';
 $route['member_get'] = 'member/member_get';
 $route['member_lists'] = 'member/member_lists';
+$route['member_view'] = 'member/member_view';
 
 $route['preferences_create'] = 'preferences/preferences_create';
 $route['preferences_delete'] = 'preferences/preferences_delete';
 $route['preferences_edit'] = 'preferences/preferences_edit';
 $route['preferences_get'] = 'preferences/preferences_get';
 $route['preferences_lists'] = 'preferences/preferences_lists';
+$route['preferences_view'] = 'preferences/preferences_view';
 
 $route['profile'] = 'admin/profile';
 
@@ -119,6 +123,8 @@ $route['program_sub_edit'] = 'program/program_sub_edit';
 $route['program_sub_delete'] = 'program/program_sub_delete';
 $route['program_sub_get'] = 'program/program_sub_get';
 $route['program_sub_lists'] = 'program/program_sub_lists';
+$route['program_sub_view'] = 'program/program_sub_view';
+$route['program_view'] = 'program/program_view';
 
 $route['slider_create'] = 'slider/slider_create';
 $route['slider_delete'] = 'slider/slider_delete';
