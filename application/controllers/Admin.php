@@ -226,12 +226,10 @@ class Admin extends CI_Controller {
 		if ($get->code == 200)
 		{
 			$result = $get->result;
-            $code_admin_status = $this->config->item('code_admin_status');
             $code_admin_role = $this->config->item('code_admin_role');
 			
             $data = array();
             $data['result'] = $result;
-            $data['code_admin_status'] = $code_admin_status;
             $data['code_admin_role'] = $code_admin_role;
 			$this->load->view('admin/admin_view', $data);
 		}
