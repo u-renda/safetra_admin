@@ -17,14 +17,15 @@
     </header>
 
     <!-- start: page -->
-    <div class="row" id="media_album_lists_page">
+    <div class="row" id="media_lists_page" data-program="<?php echo $media_album->id_media_album; ?>">
         <div class="col-md-12">
             <section class="panel panel-featured">
                 <header class="panel-heading">
-                    <h2 class="panel-title">Media Album Lists</h2>
+                    <h2 class="panel-title">Media Lists - <?php echo ucwords($media_album->name); ?></h2>
                 </header>
                 <div class="panel-body">
-                    <a type="button" class="btn btn-success mb-xl" href="<?php echo $this->config->item('link_media_album_create'); ?>">Tambah Baru</a>
+                    <a type="button" class="btn btn-success mb-xl" href="<?php echo $this->config->item('link_media_create').'?id='.$id_media_album; ?>">Tambah Baru</a>
+                    <a type="button" class="btn btn-primary mb-xl" href="<?php echo $this->config->item('link_media_album_lists'); ?>">Kembali ke Media Album</a>
                     <?php
                     if ($msg == TRUE)
                     {

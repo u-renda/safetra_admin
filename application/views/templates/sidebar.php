@@ -182,6 +182,24 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-parent list-parent" id="media">
+                        <a>
+                            <i class="fa fa-picture-o" aria-hidden="true"></i>
+                            <span>Media</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li class="list-child">
+                                <a href="<?php echo $this->config->item('link_media_album_lists'); ?>">
+                                     Lists
+                                </a>
+                            </li>
+                            <li class="list-child">
+                                <a href="<?php echo $this->config->item('link_media_album_create'); ?>">
+                                     Create
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
 

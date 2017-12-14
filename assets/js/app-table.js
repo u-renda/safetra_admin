@@ -633,6 +633,108 @@ $(function () {
     }
     
     /*
+	Media Lists
+	*/
+    if (document.getElementById('media_lists_page') != null) {
+        var id = $('#media_lists_page').attr("data-program");
+        
+        $("#multipleTable").kendoGrid({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "media_get?id=" + id,
+                        dataType: "json",
+                        type: "POST",
+                        data: {}
+                    }
+                },
+                schema: {
+                    data: "results",
+                    total: "total"
+                },
+                pageSize: 20,
+                serverPaging: true,
+                serverSorting: true,
+                serverFiltering: true,
+                cache: false
+            },
+            sortable: {
+                mode: "single",
+                allowUnsort: true
+            },
+            pageable: {
+                buttonCount: 5,
+                input: true,
+                pageSizes: true,
+                refresh: true
+            },
+            filterable: {
+                extra: false,
+                operators: {
+                    string: {
+                        contains: "Mengandung kata"
+                    }
+                }
+            },
+            selectable: "row",
+            resizable: true,
+            columns: [{
+                field: "No",
+                sortable: false,
+                filterable: false,
+                width: 30
+            },
+            {
+                field: "Image",
+                filterable: false,
+                width: 200,
+                template: "#= data.Image #"
+            },
+            {
+                field: "URL",
+                filterable: false,
+                width: 300,
+                template: "#= data.URL #"
+            },
+            {
+                field: "Action",
+                sortable: false,
+                filterable: false,
+                width: 60,
+                template: "#= data.Action #"
+            }]
+        });
+        
+        $('body').delegate(".delete", "click", function() {
+            var id = $(this).attr("id");
+            var action = "media_delete";
+            var grid = "multipleTable";
+            var dataString = 'id='+ id +'&action='+ action +'&grid='+ grid;
+            $.ajax(
+            {
+                type: "POST",
+                url: newPathname + action,
+                data: dataString,
+                cache: false,
+                beforeSend: function()
+                {
+                    $('.'+id+'-delete').html('<i class="fa fa-spinner fa-spin"></i>');
+                },
+                success: function(data)
+                {
+                    $('.'+id+'-delete').html('<i class="fa fa-times font16 text-danger"></i>');
+                    $('.modal-dialog').removeClass('modal-lg');
+                    $('.modal-dialog').addClass('modal-sm');
+                    $('.modal-title').text('Yakin Hapus?');
+                    $('.modal-body').html(data);
+                    $('#myModal').modal('show');
+                }
+            });
+            return false;
+        });
+    }
+    
+    /*
 	Member Lists
 	*/
     if (document.getElementById('member_lists_page') != null) {

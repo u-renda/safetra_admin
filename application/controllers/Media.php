@@ -66,6 +66,7 @@ class Media extends CI_Controller {
 		{
 			$this->load->library('form_validation');
 			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+			$this->form_validation->set_message('required', '%s harus diisi');
 			$this->form_validation->set_rules('name', 'Name', 'required');
 			$this->form_validation->set_rules('media[]', 'Media', 'callback_check_media');
 			
@@ -164,7 +165,7 @@ class Media extends CI_Controller {
 
         foreach ($query->result as $row)
         {
-            $action = '<a title="View Media" href="program_sub_lists?id='.$row->id_media_album.'"><i class="fa fa-external-link font16 text-success"></i></a>&nbsp;
+            $action = '<a title="View Media" href="media_lists?id='.$row->id_media_album.'"><i class="fa fa-external-link font16 text-success"></i></a>&nbsp;
 						<a title="Edit" href="program_edit?id='.$row->id_media_album.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
                         <a title="Delete" id="'.$row->id_media_album.'" class="delete '.$row->id_media_album.'-delete" href="#"><i class="fa fa-times font16 text-danger"></i></a>';
 			
@@ -187,6 +188,47 @@ class Media extends CI_Controller {
 		$data['type'] = $this->input->get('type');
 		$data['msg'] = $this->input->get('msg');
 		$data['view_content'] = 'media/media_album_lists';
+		$this->load->view('templates/frame', $data);
+	}
+	
+	function media_create()
+	{
+		$data = array();
+		$id_media_album = $this->input->get('id');
+		
+		if ($this->input->post('submit') == TRUE)
+		{
+			$this->load->library('form_validation');
+			$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+			$this->form_validation->set_message('required', '%s harus diisi');
+			$this->form_validation->set_rules('media[]', 'Media', 'callback_check_media');
+			
+			if ($this->form_validation->run() == TRUE)
+			{
+				foreach ($this->processMedia as $key => $val)
+				{
+					$param = array();
+					$param['id_media_album'] = $id_media_album;
+					$param['media_url'] = $val;
+					$query = $this->media_model->create($param);
+				}
+				
+				redirect($this->config->item('link_media_lists').'?id='.$id_media_album.'&msg=success&type=create');
+			}
+			else
+			{
+				redirect($this->config->item('link_media_lists').'?id='.$id_media_album.'&msg=error&type=create');
+			}
+		}
+		
+		$query2 = $this->media_album_model->info(array('id_media_album' => $id_media_album));
+		
+		if ($query2->code == 200)
+		{
+			$data['media_album'] = $query2->result;
+		}
+		
+		$data['view_content'] = 'media/media_create';
 		$this->load->view('templates/frame', $data);
 	}
 	
@@ -226,5 +268,64 @@ class Media extends CI_Controller {
         {
             echo "Data Not Found";
         }
+	}
+
+    function media_get()
+    {
+        $page = $this->input->post('page') ? $this->input->post('page') : 1;
+        $pageSize = $this->input->post('pageSize') ? $this->input->post('pageSize') : 20;
+        $offset = ($page - 1) * $pageSize;
+        $i = $offset * 1 + 1;
+        $order = 'created_date';
+        $sort = 'desc';
+        $sort_post = $this->input->post('sort');
+        $filter = $this->input->post('filter');
+        $id_media_album = $this->input->get_post('id');
+
+        if ($sort_post)
+        {
+            $order = $sort_post[0]['field'];
+            $sort = $sort_post[0]['dir'];
+        }
+
+        $query = $this->media_model->lists(array('id_media_album' => $id_media_album, 'limit' => $pageSize, 'offset' => $offset, 'order' => $order, 'sort' => $sort));
+		$jsonData = array('total' => $query->total, 'results' => array());
+
+        foreach ($query->result as $row)
+        {
+            $action = '<a title="Delete" id="'.$row->id_media.'" class="delete '.$row->id_media.'-delete" href="#"><i class="fa fa-times font16 text-danger"></i></a>';
+			
+			$entry = array(
+                'No' => $i,
+                'Image' => '<img src="'.$row->media_url.'" height="20%">',
+                'URL' => '<span style="word-wrap: break-word;">'.$row->media_url.'</span>',
+                'Action' => $action
+            );
+
+            $jsonData['results'][] = $entry;
+            $i++;
+        }
+
+        echo json_encode($jsonData);
+    }
+	
+	function media_lists()
+	{
+		if ($this->input->get_post('id') == FALSE) { redirect($this->config->item('link_media_album_lists')); }
+		
+		$data = array();
+		$data['id_media_album'] = $this->input->get_post('id');
+		
+		$query2 = $this->media_album_model->info(array('id_media_album' => $data['id_media_album']));
+		
+		if ($query2->code == 200)
+		{
+			$data['media_album'] = $query2->result;
+		}
+		
+		$data['type'] = $this->input->get('type');
+		$data['msg'] = $this->input->get('msg');
+		$data['view_content'] = 'media/media_lists';
+		$this->load->view('templates/frame', $data);
 	}
 }

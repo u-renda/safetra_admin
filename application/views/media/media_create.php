@@ -17,19 +17,18 @@
     </header>
 
     <!-- start: page -->
-    <div class="row" id="media_album_create_page">
+    <div class="row" id="media_create_page">
         <div class="col-md-12">
             <section class="panel panel-featured">
                 <header class="panel-heading">
-                    <h2 class="panel-title">Media Album Create</h2>
+                    <h2 class="panel-title">Media Create</h2>
                 </header>
-                <form action="<?php echo $this->config->item('link_media_album_create'); ?>" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
+                <form action="<?php echo $this->config->item('link_media_create').'?id='.$media_album->id_media_album; ?>" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered">
                     <div class="panel-body">
                         <div class="form-group">
                             <label class="col-sm-2 control-label"><span class="text-danger">*</span> Album Name:</label>
                             <div class="col-sm-10">
-                                <input type="text" name="name" class="form-control" value="<?php echo set_value('name'); ?>">
-                                <?php echo form_error('name'); ?>
+                                <p class="form-control-static"><?php echo $media_album->name; ?></p>
                             </div>
                         </div>
                         <?php for ($i=1;$i<=5;$i++) { ?>
