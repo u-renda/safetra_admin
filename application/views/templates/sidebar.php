@@ -200,6 +200,24 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-parent list-parent" id="lowongan">
+                        <a>
+                            <i class="fa fa-picture-o" aria-hidden="true"></i>
+                            <span>Lowongan</span>
+                        </a>
+                        <ul class="nav nav-children">
+                            <li class="list-child">
+                                <a href="<?php echo $this->config->item('link_lowongan_lists'); ?>">
+                                     Lists
+                                </a>
+                            </li>
+                            <li class="list-child">
+                                <a href="<?php echo $this->config->item('link_lowongan_create'); ?>">
+                                     Create
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
 

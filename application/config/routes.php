@@ -86,6 +86,12 @@ $route['check_admin_username'] = 'extra/check_admin_username';
 $route['index'] = 'login/index';
 $route['logout'] = 'login/logout';
 
+$route['lowongan_create'] = 'lowongan/lowongan_create';
+$route['lowongan_delete'] = 'lowongan/lowongan_delete';
+$route['lowongan_edit'] = 'lowongan/lowongan_edit';
+$route['lowongan_get'] = 'lowongan/lowongan_get';
+$route['lowongan_lists'] = 'lowongan/lowongan_lists';
+
 $route['media_album_create'] = 'media/media_album_create';
 $route['media_album_delete'] = 'media/media_album_delete';
 $route['media_album_get'] = 'media/media_album_get';

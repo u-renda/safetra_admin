@@ -166,7 +166,6 @@ class Media extends CI_Controller {
         foreach ($query->result as $row)
         {
             $action = '<a title="View Media" href="media_lists?id='.$row->id_media_album.'"><i class="fa fa-external-link font16 text-success"></i></a>&nbsp;
-						<a title="Edit" href="program_edit?id='.$row->id_media_album.'"><i class="fa fa-pencil font16 text-warning"></i></a>&nbsp;
                         <a title="Delete" id="'.$row->id_media_album.'" class="delete '.$row->id_media_album.'-delete" href="#"><i class="fa fa-times font16 text-danger"></i></a>';
 			
 			$entry = array(
